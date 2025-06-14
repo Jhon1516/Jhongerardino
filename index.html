@@ -1,411 +1,167 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PORTAL DE VENTAS - Verde vita</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon.png">
-  <meta name="theme-color" content="#2980b9"> <style>
-    /* CSS Variables for easier theming */
+  <meta name="viewport" content="width=device-width">
+  <title>PORTAL DE VENTAS - GERARDINO JHON</title>
+  <link rel="icon" href="/favicon-96x96.png" type="image/png">
+  <style>
     :root {
-      --primary-color: #3498db;
+      --main-color: #0077cc;
       --secondary-color: #2ecc71;
       --accent-color: #e74c3c;
       --background-light: #ecf0f1;
-      --background-dark: #34495e;
       --text-dark: #2c3e50;
-      --text-light: #ecf0f1;
       --whatsapp-green: #25D366;
       --whatsapp-green-dark: #1DA851;
       --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
-      --shadow-medium: 0 6px 18px rgba(0, 0, 0, 0.15);
-      --border-radius-soft: 8px;
-      --border-radius-round: 50px;
+      --border-radius: 8px;
     }
 
     body {
-      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
       background-color: var(--background-light);
       color: var(--text-dark);
-      line-height: 1.6;
-      scroll-behavior: smooth; /* Smooth scrolling for anchor links */
     }
 
-    /* General Container Styles */
     header, main, footer {
-      background: linear-gradient(135deg, rgba(52, 152, 219, 0.9), rgba(41, 128, 185, 0.9)); /* Subtle gradient */
-      padding: 25px;
-      border-radius: var(--border-radius-soft);
-      margin: 25px auto;
-      max-width: 960px; /* Slightly wider for more content */
-      box-shadow: var(--shadow-medium);
-      color: var(--text-light);
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 40px;
+      background: #fff;
+      box-shadow: var(--shadow-light);
+      border-radius: var(--border-radius);
     }
 
-    /* Header Navigation */
     header nav {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     header nav a {
-      color: var(--text-light);
-      text-decoration: none;
-      margin: 0 18px;
+      margin: 0 15px;
       font-weight: bold;
-      padding: 8px 10px;
-      display: inline-block;
-      transition: all 0.3s ease;
-      border-bottom: 2px solid transparent; /* For hover effect */
+      color: var(--main-color);
+      text-decoration: none;
+      transition: color 0.3s;
     }
 
     header nav a:hover {
-      text-decoration: none;
-      border-bottom-color: var(--text-light);
-      transform: translateY(-2px); /* Slight lift on hover */
+      color: var(--accent-color);
     }
 
-    /* Product Navigation */
-    .product-nav {
-      background-color: rgba(0, 0, 0, 0.4); /* Darker semi-transparent */
-      padding: 12px 0;
-      margin-top: 20px;
-      border-radius: var(--border-radius-soft);
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      position: sticky; /* Make it sticky */
-      top: 0; /* Stick to the top */
-      z-index: 1000; /* Ensure it stays on top of other content */
-      box-shadow: var(--shadow-light);
-    }
-
-    .product-nav a {
-      background-color: var(--secondary-color);
-      color: white;
-      padding: 10px 20px;
-      border-radius: var(--border-radius-round); /* More rounded buttons */
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      white-space: nowrap;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .product-nav a:hover {
-      background-color: var(--whatsapp-green-dark); /* Darker green on hover */
-      transform: translateY(-2px);
-    }
-
-    /* General Image Style */
-    img {
-      border: 3px solid white;
-      border-radius: var(--border-radius-soft);
-      margin-top: 20px;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      display: block; /* Ensures image takes full width and no extra space below */
-    }
-
-    iframe {
-      margin-top: 20px;
-      width: 100%;
-      max-width: 600px; /* Slightly wider for better video display */
-      height: 338px; /* Maintain 16:9 aspect ratio for 600px width */
-      border: none;
-      border-radius: var(--border-radius-soft);
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    blockquote {
-      font-style: italic;
-      color: rgba(255, 255, 255, 0.8); /* Lighter color for better contrast */
-      margin-top: 25px;
-      padding: 15px 25px;
-      border-left: 5px solid var(--secondary-color);
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: var(--border-radius-soft);
+    h1 {
+      text-align: center;
+      color: var(--main-color);
+      margin-top: 0;
     }
 
     h2 {
-        color: var(--primary-color);
-        text-align: center;
-        margin-top: 40px;
-        margin-bottom: 25px;
-        font-size: 2.2em; /* Larger headings */
-        font-weight: bold;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    }
-
-    /* Product Item Styles */
-    .product-item {
-      background-color: rgba(255, 255, 255, 0.98); /* Near opaque white */
-      padding: 30px;
-      border-radius: var(--border-radius-soft);
-      margin-bottom: 30px;
-      box-shadow: var(--shadow-light);
       text-align: center;
-      transition: transform 0.3s ease;
+      color: #ff4500;
+      margin: 40px 0 20px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     }
 
-    .product-item:hover {
-        transform: translateY(-5px); /* Lift effect on hover */
+    p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .product-item {
+      background: #fff;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      margin-bottom: 30px;
     }
 
     .product-item h3 {
-      color: var(--primary-color);
       margin-top: 0;
-      margin-bottom: 20px;
-      font-size: 1.8em;
-      border-bottom: 2px solid rgba(52, 152, 219, 0.2);
-      padding-bottom: 10px;
+      color: var(--main-color);
     }
 
     .product-item img {
-      max-width: 70%; /* Slightly smaller for better content flow */
-      height: auto;
-      border: 3px solid var(--primary-color); /* Border color matching theme */
-      border-radius: var(--border-radius-soft);
-      margin-bottom: 25px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 100%;
+      border: 3px solid var(--main-color);
+      border-radius: var(--border-radius);
+      display: block;
+      margin: 20px auto;
     }
 
-    .product-item p {
-      color: var(--text-dark);
-      line-height: 1.7;
-      margin-bottom: 10px;
-      font-size: 1.1em;
-    }
-
-    .product-item strong {
-        color: var(--accent-color); /* Red for price */
-        font-size: 1.3em;
-    }
-
-    /* WhatsApp Button */
-    .product-item a[href*="wa.me"] {
-        display: inline-block;
-        background-color: var(--whatsapp-green);
-        color: white;
-        padding: 15px 30px;
-        text-decoration: none;
-        border-radius: var(--border-radius-round);
-        margin-top: 25px;
-        font-weight: bold;
-        font-size: 1.1em;
-        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .product-item a[href*="wa.me"]:hover {
-        background-color: var(--whatsapp-green-dark);
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    }
-
+    .product-item p { margin: 10px 0; }
     .product-item ul {
-        list-style: none;
-        padding: 0;
-        text-align: left;
-        max-width: 85%; /* Adjust width for list */
-        margin: 20px auto 25px auto;
-        color: var(--text-dark);
-        border-top: 1px solid #eee;
-        padding-top: 15px;
+      list-style: none;
+      padding-left: 0;
+      margin: 10px 0;
     }
 
     .product-item ul li {
-        margin-bottom: 8px;
-        padding-left: 25px;
-        position: relative;
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
     }
 
     .product-item ul li::before {
-        content: '✓'; /* Checkmark for list items */
-        color: var(--secondary-color);
-        position: absolute;
-        left: 0;
-        font-weight: bold;
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--secondary-color);
     }
 
-    .product-item h4 {
-        color: var(--background-dark);
-        margin-top: 30px;
-        margin-bottom: 15px;
-        font-size: 1.4em;
-        text-align: center;
+    .product-item a.whatsapp-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: var(--whatsapp-green);
+      color: #fff;
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
     }
 
-    /* Main content specific paragraph */
-    main > p {
-        color: var(--text-light);
-        text-align: center;
-        font-size: 1.1em;
-        margin-bottom: 30px;
-        padding: 0 15px;
+    .product-item a.whatsapp-btn:hover {
+      background-color: var(--whatsapp-green-dark);
+      transform: translateY(-2px);
     }
 
-    /* Footer Styles */
+    iframe {
+      width: 100%;
+      height: 480px;
+      border: none;
+      border-radius: var(--border-radius);
+      display: block;
+      margin: 40px 0;
+    }
+
     footer {
       text-align: center;
-      padding: 20px;
       font-size: 0.9em;
-      color: rgba(255, 255, 255, 0.8);
-      margin-top: 40px;
-      background: linear-gradient(135deg, rgba(41, 128, 185, 0.9), rgba(52, 152, 219, 0.9)); /* Matching header gradient */
+      color: rgba(44, 62, 80, 0.8);
     }
 
-    footer p {
-        margin: 5px 0;
+    /* WhatsApp flotante */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--whatsapp-green);
+      color: #fff;
+      padding: 16px 20px;
+      border-radius: 50px;
+      font-size: 20px;
+      text-decoration: none;
+      box-shadow: var(--shadow-light);
+      transition: transform 0.3s;
+      z-index: 1000;
     }
 
-    /* Specific Maca-Life section styling */
-    .product-item.maca-life-section { /* Added a specific class for Maca-Life if needed for unique styling */
-        text-align: center;
-    }
-
-    .maca-life-section .content-flex {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
-        align-items: flex-start;
-        justify-content: center; /* Center content horizontally */
-        margin-top: 25px;
-    }
-
-    .maca-life-section img {
-        max-width: 350px; /* Adjust max-width for the image within this section */
-        width: 100%;
-        height: auto;
-        border-radius: var(--border-radius-soft);
-        box-shadow: var(--shadow-light);
-        flex-shrink: 0; /* Prevent image from shrinking */
-    }
-
-    .maca-life-section .text-content {
-        flex: 1;
-        min-width: 280px; /* Minimum width before wrapping */
-        text-align: left; /* Align text within its container */
-    }
-
-    .maca-life-section .text-content ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        max-width: none; /* Override general ul max-width for this section */
-    }
-
-    .maca-life-section .text-content ul li::before {
-        content: '•'; /* Use bullet points for Maca-Life list */
-        color: var(--primary-color);
-        position: absolute;
-        left: 0;
-        font-weight: bold;
-    }
-
-    .maca-life-section .text-content p {
-        margin-bottom: 10px;
-    }
-
-    .maca-life-section .price {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: var(--accent-color);
-        margin-top: 15px;
-        display: block;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      header, main, footer {
-        margin: 15px auto;
-        padding: 20px;
-      }
-
-      header nav a {
-        margin: 0 10px;
-        padding: 5px 0;
-      }
-
-      .product-nav {
-        padding: 10px;
-        gap: 8px;
-        flex-direction: row; /* Keep row for smaller screens, let flex-wrap handle it */
-      }
-
-      .product-nav a {
-        padding: 8px 15px;
-        font-size: 0.9em;
-      }
-
-      h2 {
-        font-size: 1.8em;
-      }
-
-      .product-item {
-        padding: 20px;
-      }
-
-      .product-item h3 {
-        font-size: 1.5em;
-      }
-
-      .product-item img {
-        max-width: 90%;
-      }
-
-      .product-item strong {
-        font-size: 1.1em;
-      }
-
-      .product-item a[href*="wa.me"] {
-        padding: 12px 20px;
-        font-size: 1em;
-      }
-
-      .maca-life-section .content-flex {
-          flex-direction: column;
-          align-items: center;
-      }
-      .maca-life-section .text-content {
-          text-align: center;
-      }
-      .maca-life-section .text-content ul {
-          text-align: left; /* Keep lists left-aligned even if main text is centered */
-      }
-    }
-
-    @media (max-width: 480px) {
-        header nav a {
-            display: block; /* Stack main nav links on very small screens */
-            margin: 8px 0;
-        }
-        .product-nav {
-            flex-direction: column; /* Stack product nav buttons */
-            padding: 15px;
-        }
-        .product-nav a {
-            width: 80%; /* Make buttons wider */
-            max-width: 250px;
-            text-align: center;
-        }
-        h2 {
-            font-size: 1.5em;
-        }
-        main > p {
-            font-size: 1em;
-        }
-        .product-item h3 {
-            font-size: 1.3em;
-        }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
@@ -413,222 +169,147 @@
 
   <header>
     <nav>
-      <a href="https://www.facebook.com/jhon.gerardiino" target="_blank" rel="noopener noreferrer">FACEBOOK</a>
-      <a href="https://www.atomy.com/co/Home/Account/Login" target="_blank" rel="noopener noreferrer">ATOMY COLOMBIA</a>
-      <a href="https://www.tiktok.com/@charranet?_t=ZS-8x45O9fUmUE&_r=1" target="_blank" rel="noopener noreferrer">TIKTOK</a>
+      <a href="https://www.facebook.com/jhon.gerardiino" target="_blank">Facebook</a>
+      <a href="https://www.atomy.com/co/Home/Account/Login" target="_blank">Atomy Colombia</a>
+      <a href="https://www.tiktok.com/@charranet" target="_blank">TikTok</a>
     </nav>
-    <nav class="product-nav">
-        <a href="#vid-life-section">VID-LIFE</a>
-        <a href="#protec-life-section">PROTEC-LIFE</a>
-        <a href="#protec-r-section">PROTEC R</a>
-        <a href="#life-dig-section">LIFE-DIG</a>
-        <a href="#gravi-life-section">GRAVI-LIFE</a>
-        <a href="#maca-life-section">MACA-LIFE</a>
-        <a href="#Jufre-life-section">Jufre-life</a>
-    </nav>
+    <h1>PORTAL DE VENTAS - GERARDINO JHON</h1>
   </header>
 
   <main>
     <p>
-      <h2 style="color: #000000; font-weight: bold;">
-      ¡BIENVENIDO A TU NUEVO PORTAL DE BIENESTAR Y OPORTUNIDADES! SOY GERARDINO JHON, EL CREADOR DE ESTE ESPACIO.<br>
-      AQUÍ TE PRESENTO UNA SELECCIÓN DE PRODUCTOS DE MUY ALTA CALIDAD, CÓMO NUESTRO DESTACADO **PROTEC-LIFE**, PENSADOS PARA POTENCIAR TU SALUD Y VITALIDAD.
-      EXPLORA NUESTROS PRODUCTOS, DESCUBRE NUESTROS SERVICIOS Y, SI TE INTERESA, ¡TAMBIÉN CÓMO SER PARTE DE ESTA OPORTUNIDAD!
-      COMO NOS DICE NUESTRO CREADOR DIOS JEHOVÁ:</h2>
+      ¡BIENVENIDO A TU NUEVO PORTAL DE BIENESTAR Y OPORTUNIDADES! SOY <strong>GERARDINO JHON</strong>, EL CREADOR DE ESTE ESPACIO. AQUÍ TE PRESENTO UNA SELECCIÓN DE PRODUCTOS DE MUY ALTA CALIDAD, COMO NUESTRO DESTACADO <strong>PROTEC-LIFE</strong>, PENSADOS PARA POTENCIAR TU SALUD Y VITALIDAD. EXPLORA NUESTROS PRODUCTOS, DESCUBRE NUESTROS SERVICIOS Y, SI TE INTERESA, ¡CÓMO SER PARTE DE ESTA OPORTUNIDAD! COMO NOS DICE NUESTRO CREADOR DIOS JEHOVÁ:
     </p>
 
     <blockquote>
       "La sabiduría es lo más importante, así que consigue sabiduría. Y, con todo lo que consigas, consigue entendimiento" – Proverbios 4:7
     </blockquote>
 
-    <h2 style="color: #000000; font-weight: bold; text-shadow: 2px 2px 4px #888;">
-𝙏𝙀𝙉𝙀𝙈𝙊𝙎 𝙐𝙉𝘼 𝙁𝙊𝙍𝙈𝘼 𝘿𝙀 𝙃𝘼𝘾𝙀𝙍 𝘿𝙄𝙉𝙀𝙍𝙊 𝘿𝙀 𝙁𝙊𝙍𝙈𝘼 𝙍𝘼𝙋𝙄𝘿𝘼 𝙔 𝙈𝙐𝙔 𝙀𝙁𝙄𝘾𝘼𝙕, ¡𝘼𝙌𝙐𝙄 𝙀𝙎𝙏𝘼 𝙏𝙐 𝙊𝙋𝙊𝙍𝙏𝙐𝙉𝙄𝘿𝘼𝘿!</h2>
-    
+    <h2>TENEMOS UNA FORMA DE HACER DINERO DE FORMA RÁPIDA Y MUY EFICAZ, ¡AQUÍ ESTÁ TU OPORTUNIDAD!</h2>
     <img src="https://i.postimg.cc/9XxP91PT/logo-lifehuni-1-600x270.png" alt="Logo LifeHuni">
 
-    
-<h2 style="color: #000000; font-weight: bold; text-shadow: 2px 2px 4px #888;">𝙉𝙪𝙚𝙨𝙩𝙧𝙤𝙨 𝙋𝙧𝙤𝙙𝙪𝙘𝙩𝙤𝙨 𝘿𝙚𝙨𝙩𝙖𝙘𝙖𝙙𝙤𝙨</h2>
-    <hr>
+    <h2>Nuestros Productos Destacados</h2>
 
-    <section id="vid-life-section" class="product-item">
+    <!-- VID-LIFE -->
+    <section class="product-item" id="vid-life-section">
       <h3>VID-LIFE 60 CAP</h3>
       <img src="https://i.postimg.cc/MT0NKGZ8/Vid-life.jpg" alt="VID-LIFE 60 Cápsulas">
-      <p><strong>Precio:</strong> $ 81.738 COP</p>
-      <p><strong>Contenido Neto:</strong> 60 cápsulas.</p>
-      <p><strong>Origen:</strong> Fabricado en Colombia.</p>
-      <p><strong>Registro INVIMA:</strong> No. SD2012-0002444</p>
-
-      <h4>RECOMENDACIONES:</h4>
+      <p><strong>Precio:</strong> $81.738 COP</p>
+      <p><strong>Contenido:</strong> 60 cápsulas.</p>
+      <p><strong>Registro INVIMA:</strong> SD2012-0002444</p>
+      <h4>Recomendaciones:</h4>
       <ul>
-        <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
-        <li>Conserve el producto en un lugar fresco y seco.</li>
+        <li>Siga instrucciones de uso.</li>
+        <li>Conserve en lugar fresco y seco.</li>
         <li>Manténgalo fuera del alcance de los niños.</li>
-        <li>Tómelo con las comidas, preferiblemente.</li>
-        <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
-        <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
+        <li>Tómelo con las comidas.</li>
+        <li>Consulte a su médico si tiene condiciones especiales.</li>
       </ul>
-
-      <p>
-        <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20VID-LIFE%2060%20CAP" target="_blank" rel="noopener noreferrer">Comprar o Más Información (WhatsApp)</a>
-      </p>
+      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20VID-LIFE%2060%20CAP" class="whatsapp-btn" target="_blank">
+        Comprar o info por WhatsApp
+      </a>
     </section>
-    <hr>
 
-    <section id="protec-life-section" class="product-item">
+    <!-- PROTEC-LIFE -->
+    <section class="product-item" id="protec-life-section">
       <h3>PROTEC-LIFE 500GR</h3>
-      <img src="https://i.postimg.cc/kgMS8sbL/PWEB-Protec-life-sesion-web.jpg" alt="PROTEC-LIFE Fresa, Vainilla y Chocolate">
-      <p><strong>Precio:</strong> $ 130.780 COP</p>
-      <p><strong>Descripción:</strong> Suplemento natural en polvo. Frasco por 500 gramos.</p>
-      <p><strong>Sabores disponibles:</strong> Fresa, Vainilla y Chocolate.</p>
-      <p><strong>Origen:</strong> Fabricado en Colombia.</p>
-      <p><strong>Registro INVIMA:</strong> N° SD2012-0002461</p>
-
-      <h4>RECOMENDACIONES:</h4>
+      <img src="https://i.postimg.cc/kgMS8sbL/PWEB-Protec-life-sesion-web.jpg" alt="PROTEC-LIFE">
+      <p><strong>Precio:</strong> $130.780 COP</p>
+      <p><strong>Registro INVIMA:</strong> SD2012-0002461</p>
       <ul>
-        <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
-        <li>Conserve el producto en un lugar fresco y seco.</li>
-        <li>Manténgalo fuera del alcance de los niños.</li>
-        <li>Tómelo con las comidas, preferiblemente.</li>
-        <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
-        <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
+        <li>Conserve en lugar fresco y seco.</li>
+        <li>Manténgalo alejado del alcance de los niños.</li>
+        <li>Tómelo con las comidas.</li>
+        <li>Consulte a su médico si lo necesita.</li>
       </ul>
-
-      <p>
-        <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20PROTEC-LIFE%20500GR%20(Fresa%20o%20Vainilla)" target="_blank" rel="noopener noreferrer">Comprar o Más Información (WhatsApp)</a>
-      </p>
+      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20PROTEC-LIFE%20500GR" class="whatsapp-btn" target="_blank">
+        Comprar o info por WhatsApp
+      </a>
     </section>
-    <hr>
 
-    <section id="protec-r-section" class="product-item">
+    <!-- PROTEC-R -->
+    <section class="product-item" id="protec-r-section">
       <h3>PROTEC R</h3>
-      <img src="https://i.postimg.cc/G2MRvMm8/Protec-R-COL-2024-312x312.png" alt="PROTEC R Frutos Rojos y Piña">
-      <p><strong>Precio:</strong> $ 105.049 COP</p>
-      <p><strong>Presentación:</strong> Caja por 25 unidades.</p>
-      <p><strong>Contenido:</strong> Sachet de 6 GR.</p>
-      <p><strong>Sabores disponibles:</strong> Frutos Rojos y Piña.</p>
-      <p><strong>Características:</strong> Viene en dosis individuales que facilitan su preparación rápida.</p>
-      <p><strong>Origen:</strong> Fabricado en Colombia.</p>
-      <p><strong>Registro INVIMA (Piña):</strong> N°. NSA-0015860-2024 Var 1</p>
-
-      <h4>RECOMENDACIONES:</h4>
+      <img src="https://i.postimg.cc/G2MRvMm8/Protec-R-COL-2024-312x312.png" alt="PROTEC R">
+      <p><strong>Precio:</strong> $105.049 COP</p>
+      <p><strong>Registro INVIMA:</strong> NSA-0015860-2024</p>
       <ul>
-        <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
-        <li>Conserve el producto en un lugar fresco y seco.</li>
-        <li>Manténgalo fuera del alcance de los niños.</li>
-        <li>Tómelo con las comidas, preferiblemente.</li>
-        <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
-        <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
+        <li>Cadena de conservación adecuada.</li>
+        <li>Conservar en lugar fresco.</li>
+        <li>Consulte a su médico si es necesario.</li>
       </ul>
-
-      <p>
-        <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20PROTEC%20R%20(Frutos%20Rojos%20o%20Piña)" target="_blank" rel="noopener noreferrer">Comprar o Más Información (WhatsApp)</a>
-      </p>
+      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20PROTEC%20R" class="whatsapp-btn" target="_blank">
+        Comprar o info por WhatsApp
+      </a>
     </section>
-    <hr>
 
-    <section id="life-dig-section" class="product-item">
-        <h3>LIFE-DIG 60 CAP</h3>
-        <img src="https://i.postimg.cc/XJp1L1FC/Life-Dig-Mesa-de-trabajo-1-2.jpg" alt="LIFE-DIG 60 CAP">
-        <p><strong>Precio:</strong> $ 81.738 COP</p>
-        <p><strong>Contenido Neto:</strong> 60 cápsulas.</p>
-        <p><strong>Beneficios:</strong> Mejora el tránsito intestinal, el estreñimiento y desinflama el colon. Ayuda con la distensión abdominal.</p>
-        <p><strong>Ingredientes principales:</strong> Extracto de Sábila, Papaya, Alfalfa, Psyllium, Linaza, Germen de Trigo, Ñame, Anís Semillas, L-Glutamina, Vitamina C.</p>
-        <p><strong>Registro INVIMA:</strong> N°. SD2018-0004231</p>
-
-        <h4>RECOMENDACIONES:</h4>
-        <ul>
-          <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
-          <li>Conserve el producto en un lugar fresco y seco.</li>
-          <li>Manténgalo fuera del alcance de los niños.</li>
-          <li>Tómelo con las comidas, preferiblemente.</li>
-          <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
-          <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
-        </ul>
-
-        <p>
-            <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20LIFE-DIG%2060%20CAP" target="_blank" rel="noopener noreferrer">Comprar o Más Información (WhatsApp)</a>
-        </p>
+    <!-- LIFE-DIG -->
+    <section class="product-item" id="life-dig-section">
+      <h3>LIFE-DIG 60 CAP</h3>
+      <img src="https://i.postimg.cc/XJp1L1FC/Life-Dig-Mesa-de-trabajo-1-2.jpg" alt="LIFE-DIG">
+      <p><strong>Precio:</strong> $81.738 COP</p>
+      <p><strong>Registro INVIMA:</strong> SD2018-0004231</p>
+      <ul>
+        <li>Mejora tránsito intestinal.</li>
+        <li>Conserve en lugar seco.</li>
+        <li>Consulte a su médico si aplica.</li>
+      </ul>
+      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20LIFE-DIG%2060%20CAP" class="whatsapp-btn" target="_blank">
+        Comprar o info por WhatsApp
+      </a>
     </section>
-    <hr>
 
-    <section id="gravi-life-section" class="product-item">
-        <h3>GRAVI-LIFE 60 TAB</h3>
-        <img src="https://i.postimg.cc/SQz5z1D3/Gravi-Life-Mesa-de-trabajo-1-3.jpg" alt="GRAVI-LIFE 60 Tabletas">
-        <p><strong>Precio:</strong> $ 81.738 COP</p>
-        <p><strong>Contenido Neto:</strong> 60 tabletas.</p>
-        <p><strong>Origen:</strong> Fabricado en Colombia.</p>
-        <p><strong>Registro INVIMA:</strong> N°. SD2018-0004239</p>
-
-        <h4>RECOMENDACIONES:</h4>
-        <ul>
-            <li>Conserve el producto en un lugar fresco y seco.</li>
-            <li>Manténgalo fuera del alcance de los niños.</li>
-            <li>Tómelo con las comidas, preferiblemente antes del desayuno.</li>
-            <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
-            <li>Este producto es un suplemento dietario. No es un medicamento y no suple una alimentación equilibrada.</li>
-        </ul>
-
-        <p>
-            <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20GRAVI-LIFE%2060%20TAB" target="_blank" rel="noopener noreferrer">Comprar o Más Información (WhatsApp)</a>
-        </p>
+    <!-- GRAVI-LIFE -->
+    <section class="product-item" id="gravi-life-section">
+      <h3>GRAVI-LIFE 60 TAB</h3>
+      <img src="https://i.postimg.cc/SQz5z1D3/Gravi-Life-Mesa-de-trabajo-1-3.jpg" alt="GRAVI-LIFE">
+      <p><strong>Precio:</strong> $81.738 COP</p>
+      <p><strong>Registro INVIMA:</strong> SD2018-0004239</p>
+      <ul>
+        <li>Conserve en lugar fresco.</li>
+        <li>Consulte a su médico si necesita.</li>
+      </ul>
+      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20GRAVI-LIFE%2060%20TAB" class="whatsapp-btn" target="_blank">
+        Comprar o info por WhatsApp
+      </a>
     </section>
-    <hr>
-<section id="maca-life-section" class="product-item">
-  <h3>MACA-LIFE 60 CAP</h3>
-  <img src="https://i.postimg.cc/xqDtLyD8/Maca-life-scaled.jpg" alt="Maca-Life suplemento dietario">
-  <p><strong>Precio:</strong> $81.738 COP</p>
-  <p><strong>Descripción:</strong> Suplemento dietario en cápsulas de gelatina dura. Contiene maca, lecitina de soya, colina, vitaminas, minerales, calcio y selenio.</p>
-  <p><strong>Sabores disponibles:</strong> Único.</p>
-  <p><strong>Origen:</strong> Fabricado en Colombia.</p>
-  <p><strong>Registro INVIMA:</strong> N° SD2018-0004239</p>
 
-  <h4>RECOMENDACIONES:</h4>
-  <ul>
-    <li>✓ Siga las instrucciones de uso que aparecen en la etiqueta.</li>
-    <li>✓ Conserve el producto en un lugar fresco y seco.</li>
-    <li>✓ Manténgalo fuera del alcance de los niños.</li>
-    <li>✓ Tómelo con las comidas, preferiblemente.</li>
-    <li>✓ Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
-    <li>✓ Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
-  </ul>
-
-  <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20MACA-LIFE%2060%20CAP" target="_blank" class="buy-button">Comprar por WhatsApp</a>
-</section>
-                  <section id="Jufre-life-section" class="product-item">
-  <h3>JUFRE-LIFE 500GR</h3>
-  <img src="https://i.postimg.cc/sfHKWLKz/Jufres-3-scaled.jpg" alt="Jufre-life">
-  <p><strong>Precio:</strong> $81.738 COP</p>
-  <p><strong>Descripción:</strong> Suplemento natural en polvo. Frasco por 60 tabletas.</p>
-  <p><strong>Sabores disponibles:</strong> Único.</p>
-  <p><strong>Origen:</strong> Fabricado en Colombia.</p>
-  <p><strong>Registro INVIMA:</strong> N° SD2012-0002461</p>
-
-  <h4>RECOMENDACIONES:</h4>
-  <ul>
-    <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
-    <li>Conserve el producto en un lugar fresco y seco.</li>
-    <li>Manténgalo fuera del alcance de los niños.</li>
-    <li>Tómelo con las comidas, preferiblemente.</li>
-    <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
-    <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
-  </ul>
-
-  <a href="https://wa.me/+573237917044?text=Hola%2C%20quiero%20comprar%20JUFRE-LIFE%20500GR" target="_blank" class="buy-button">Comprar por WhatsApp</a>
-</section>
-                </p>
-            </div>
-        </div>
+    <!-- MACA-LIFE -->
+    <section class="product-item" id="maca-life-section">
+      <h3>MACA-LIFE 60 CAP</h3>
+      <img src="https://i.postimg.cc/xqDtLyD8/Maca-life-scaled.jpg" alt="MACA-LIFE">
+      <p><strong>Precio:</strong> $81.738 COP</p>
+      <p><strong>Registro INVIMA:</strong> SD2018-0004239</p>
+      <ul>
+        <li>Conservar en lugar fresco y seco.</li>
+        <li>Consulte a su médico si es necesario.</li>
+      </ul>
+      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20MACA-LIFE%2060%20CAP" class="whatsapp-btn" target="_blank">
+        Comprar o info por WhatsApp
+      </a>
     </section>
-    <hr>
 
+    <!-- JUFRE-LIFE -->
+    <section class="product-item" id="Jufre-life-section">
+      <h3>JUFRE-LIFE 500GR</h3>
+      <img src="https://i.postimg.cc/sfHKWLKz/Jufres-3-scaled.jpg" alt="JUFRE-LIFE">
+      <p><strong>Precio:</strong> $81.738 COP</p>
+      <p><strong>Registro INVIMA:</strong> SD2012-0002461</p>
+      <ul>
+        <li>Conservar en lugar fresco.</li>
+        <li>Consulte a su médico si es necesario.</li>
+      </ul>
+      <a href="https://wa.me/573053443361?text=Hola,%20me%20interesa%20JUFRE-LIFE%20500GR" class="whatsapp-btn" target="_blank">
+        Comprar o info por WhatsApp
+      </a>
+    </section>
   </main>
 
   <footer>
     <p>Todos los derechos reservados &copy; 2025</p>
-    <p>Página Original & Auténtica &copy; █│║▌║││█║▌║▌║</p>
-    <p>Verificado por Telegram</p>
+    <p>Página Original & Auténtica</p>
   </footer>
 
+  <a href="https://wa.me/573245372698" class="whatsapp-float" target="_blank">💬 WhatsApp</a>
 </body>
 </html>
-
