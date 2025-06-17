@@ -1,636 +1,3072 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <title>PORTAL DE VENTAS - VERDE VITAL</title>
-  <link rel="icon" href="/favicon-96x96.png" type="image/png">
-  <style>
-    :root {
-      --main-color: #0077cc;
-      --secondary-color: #2ecc71;
-      --accent-color: #e74c3c;
-      --background-light: #ecf0f1;
-      --text-dark: #2c3e50;
-      --whatsapp-green: #25D366;
-      --whatsapp-green-dark: #1DA851;
-      --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
-      --border-radius: 8px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTAL DE VENTAS - VERDE VITAL</title>
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: var(--background-light);
-      color: var(--text-dark);
-    }
+    <style>
+        :root {
+            --main-color: #0077cc; /* Azul vibrante */
+            --secondary-color: #2ecc71; /* Verde esmeralda */
+            --accent-color: #e74c3c; /* Rojo para acentos/advertencias */
+            --background-light: #ecf0f1; /* Gris claro de fondo */
+            --text-dark: #2c3e50; /* Gris oscuro para texto */
+            --whatsapp-green: #25D366; /* Verde WhatsApp */
+            --whatsapp-green-dark: #1DA851; /* Verde WhatsApp más oscuro */
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --button-hover-brightness: 1.1; /* Ligero brillo al pasar el ratón */
+        }
 
-    header, main, footer {
-      max-width: 960px;
-      margin: 40px auto;
-      padding: 40px;
-      background: #fff;
-      box-shadow: var(--shadow-light);
-      border-radius: var(--border-radius);
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-    header nav {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        header {
+            max-width: 960px;
+            margin: 40px auto 20px auto; /* Ajuste margen inferior */
+            padding: 40px;
+            background: #fff;
+            box-shadow: var(--shadow-light);
+            border-radius: var(--border-radius);
+            position: relative; /* Asegura que z-index funcione en nav si fuera necesario */
+            z-index: 100; /* Z-index para asegurar que el header esté sobre el contenido */
+        }
 
-    header nav a {
-      margin: 0 15px;
-      font-weight: bold;
-      color: var(--main-color);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+        main, footer {
+            max-width: 960px;
+            margin: 20px auto 40px auto; /* Ajuste margen superior */
+            padding: 40px;
+            background: #fff;
+            box-shadow: var(--shadow-light);
+            border-radius: var(--border-radius);
+            z-index: 1; /* z-index base para el contenido principal */
+        }
 
-    header nav a:hover {
-      color: var(--accent-color);
-    }
+        header nav {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-    h1 {
-      text-align: center;
-      color: var(--main-color);
-      margin-top: 0;
-    }
+        header nav a, .dropbtn {
+            font-weight: 600;
+            color: var(--main-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+            border-radius: 5px;
+            display: inline-block;
+        }
 
-    h2 {
-      text-align: center;
-      color: #ff4500;
-      margin: 40px 0 20px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    }
+        header nav a:hover, .dropbtn:hover {
+            color: white;
+            background-color: var(--main-color);
+            transform: translateY(-2px);
+        }
 
-    p {
-      font-size: 1.1em;
-      margin-bottom: 20px;
-      text-align: justify;
-    }
+        h1 {
+            text-align: center;
+            color: var(--main-color);
+            margin-top: 0;
+            font-size: 2.5em;
+            letter-spacing: -0.5px;
+        }
 
-    .product-item {
-      background: #fff;
-      padding: 30px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow-light);
-      margin-bottom: 30px;
-    }
+        h2 {
+            text-align: center;
+            color: var(--accent-color);
+            margin: 40px 0 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-size: 2em;
+        }
 
-    .product-item h3 {
-      margin-top: 0;
-      color: var(--main-color);
-    }
+        h3 {
+            color: var(--main-color);
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
 
-    .product-item img {
-      max-width: 100%;
-      border: 3px solid var(--main-color);
-      border-radius: var(--border-radius);
-      display: block;
-      margin: 20px auto;
-    }
+        p {
+            font-size: 1.05em;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
 
-    .product-item p { margin: 10px 0; }
-    .product-item ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 10px 0;
-    }
+        blockquote {
+            background-color: #f0f8ff;
+            border-left: 5px solid var(--secondary-color);
+            margin: 20px 0;
+            padding: 15px 20px;
+            font-style: italic;
+            color: #555;
+            border-radius: var(--border-radius);
+        }
 
-    .product-item ul li {
-      padding-left: 20px;
-      position: relative;
-      margin-bottom: 8px;
-    }
+        .product-item {
+            background: #fff;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-bottom: 30px;
+        }
 
-    .product-item ul li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--secondary-color);
-    }
+        .product-item img {
+            max-width: 100%;
+            border: 3px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            display: block;
+            margin: 25px auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
 
-    .product-item a.whatsapp-btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: var(--whatsapp-green);
-      color: #fff;
-      text-decoration: none;
-      border-radius: var(--border-radius);
-      font-weight: bold;
-      transition: background-color 0.3s, transform 0.2s;
-    }
+        .product-item ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 10px 0;
+        }
 
-    .product-item a.whatsapp-btn:hover {
-      background-color: var(--whatsapp-green-dark);
-      transform: translateY(-2px);
-    }
+        .product-item ul li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 10px;
+        }
 
-    iframe {
-      width: 100%;
-      height: 480px;
-      border: none;
-      border-radius: var(--border-radius);
-      display: block;
-      margin: 40px 0;
-    }
+        .product-item ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
 
-    footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: rgba(44, 62, 80, 0.8);
-    }
+        .toggle-btn {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 15px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-    /* WhatsApp flotante */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: var(--whatsapp-green);
-      color: #fff;
-      padding: 16px 20px;
-      border-radius: 50px;
-      font-size: 20px;
-      text-decoration: none;
-      box-shadow: var(--shadow-light);
-      transition: transform 0.3s;
-      z-index: 1000;
-    }
+        .toggle-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
 
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-    }
-  </style>
+        .details-content {
+            display: none;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        .details-content.show {
+            display: block;
+        }
+
+        .sub-detail-section {
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 18px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .sub-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--main-color);
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .sub-detail-header:hover {
+            color: var(--secondary-color);
+        }
+
+        .sub-detail-header .arrow {
+            font-size: 1.3em;
+            transition: transform 0.3s ease;
+            color: var(--secondary-color);
+        }
+
+        .sub-detail-header.active .arrow {
+            transform: rotate(180deg);
+            color: var(--accent-color);
+        }
+
+        .sub-detail-content {
+            display: none;
+            padding-top: 18px;
+            line-height: 1.6;
+        }
+
+        .sub-detail-content.show-sub {
+            display: block;
+        }
+
+        iframe {
+            width: 100%;
+            height: 480px;
+            border: none;
+            border-radius: var(--border-radius);
+            display: block;
+            margin: 40px 0;
+            box-shadow: var(--shadow-light);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: rgba(44, 62, 80, 0.8);
+            margin-top: 60px;
+            padding: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        /* WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp-green);
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 50px;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 9999; /* z-index estándar, debajo del modal */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-3px);
+            background-color: var(--whatsapp-green-dark);
+        }
+
+        /* Carrito flotante */
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow-light);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998; /* z-index estándar, debajo del modal */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cart-icon:hover {
+            background-color: #28a745;
+            transform: scale(1.05);
+        }
+
+        .cart-count {
+            font-size: 0.8em;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            padding: 3px 7px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* Modal del Carrito de Compras */
+        .shopping-cart-modal {
+            display: none; /* Asegúrate de que esto esté aquí por defecto */
+            position: fixed;
+            z-index: 10000; /* El más alto para que siempre esté encima de todo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7); /* Ligeramente más oscuro para superposición */
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out; /* Animación de entrada */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .shopping-cart-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #888;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            animation: fadeInScale 0.3s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-cart-btn {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-cart-btn:hover,
+        .close-cart-btn:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        #cart-items-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        #cart-items-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        #cart-items-list li:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+            font-size: 1.05em;
+        }
+
+        .cart-item-info small {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-item-actions button {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s ease;
+        }
+
+        .cart-item-actions button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .cart-item-remove {
+            background-color: var(--accent-color) !important;
+        }
+
+        .cart-item-remove:hover {
+            background-color: #c0392b !important;
+        }
+
+        #cart-total {
+            text-align: right;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 25px;
+            padding-top: 18px;
+            border-top: 2px solid var(--main-color);
+            color: var(--text-dark);
+        }
+
+        .add-to-cart-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            width: fit-content;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--whatsapp-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .checkout-button {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .checkout-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            color: #777;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Estilos para el menú desplegable (dropdown) */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 101; /* Z-index para que esté por encima del header y contenido */
+            border-radius: var(--border-radius);
+            left: 50%;
+            transform: translateX(-50%);
+            top: calc(100% + 5px);
+            padding: 8px 0;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .dropdown-content a {
+            color: var(--text-dark);
+            padding: 12px 18px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s, color 0.2s;
+            font-weight: normal;
+            margin: 0;
+            border-radius: var(--border-radius);
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--main-color);
+            color: white;
+        }
+
+        /* Mostrar el menú desplegable al pasar el ratón */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* MEDIA QUERIES PARA RESPONSIVIDAD */
+        @media (max-width: 768px) {
+            header, main, footer {
+                margin: 20px auto;
+                padding: 20px;
+            }
+
+            header nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            header nav a, .dropbtn {
+                padding: 8px 10px;
+                font-size: 0.95em;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .product-item {
+                padding: 20px;
+            }
+
+            .sub-detail-section {
+                padding: 15px;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 16px;
+                font-size: 18px;
+            }
+
+            .cart-icon {
+                top: 15px;
+                right: 20px;
+                padding: 10px 13px;
+                font-size: 0.9em;
+            }
+
+            .shopping-cart-content {
+                width: 95%;
+                padding: 20px;
+            }
+
+            #cart-items-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 0;
+            }
+
+            .cart-item-actions {
+                margin-top: 10px;
+                justify-content: flex-end;
+                width: 100%;
+            }
+        }
+
+        /* NUEVA SECCIÓN DE ESTILOS PARA LA PUERTA DE ENTRADA */
+        .entrance-door {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--main-color); /* Color principal */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10003; /* ¡MUY ALTO! para asegurar que cubre todo */
+            color: white;
+            text-align: center;
+            opacity: 1; /* Inicia visible */
+            transition: opacity 0.5s ease; /* Transición suave para cuando desaparece */
+        }
+
+        .entrance-door.hide-door {
+            opacity: 0;
+        }
+
+        .entrance-door h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: white; /* Asegura que el título sea blanco */
+        }
+
+        .entrance-door button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: var(--border-radius);
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .entrance-door button:hover {
+            background-color: var(--whatsapp-green-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        }
+
+        /* CLASES PARA EL CONTENIDO PRINCIPAL Y SU VISIBILIDAD */
+        .content-hidden {
+            display: none; /* Oculta el contenido principal por defecto */
+        }
+
+        .content-visible {
+            display: block; /* Muestra el contenido principal */
+            animation: fadeInContent 1s ease-out forwards; /* Animación de entrada */
+        }
+
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* FIN NUEVA SECCIÓN DE ESTILOS */
+    </style>
 </head>
-<body>
+<body id="top">
 
-  <header>
-    <nav>
-      <a href="https://www.facebook.com/jhon.gerardiino" target="_blank">Facebook</a>
-      <a href="https://www.atomy.com/co/Home/Account/Login" target="_blank">Atomy Colombia</a>
-      <a href="https://www.tiktok.com/@charranet" target="_blank">TikTok</a>
-    </nav>
-    <h1>PORTAL DE VENTAS - GERARDINO JHON</h1>
-  </header>
+    <div id="entranceDoor" class="entrance-door">
+        <h2>PORTAL DE VENTAS</h2>
+        <button id="enterButton">ENTRAR</button>
+    </div>
 
-  <main>
-    <p>
-      ¡BIENVENIDO A TU NUEVO PORTAL DE BIENESTAR Y OPORTUNIDADES! SOY <strong>GERARDINO JHON</strong>, EL CREADOR DE ESTE ESPACIO. AQUÍ TE PRESENTO UNA SELECCIÓN DE PRODUCTOS DE MUY ALTA CALIDAD, COMO NUESTRO DESTACADO <strong>PROTEC-LIFE</strong>, PENSADOS PARA POTENCIAR TU SALUD Y VITALIDAD. EXPLORA NUESTROS PRODUCTOS, DESCUBRE NUESTROS SERVICIOS Y, SI TE INTERESA, ¡CÓMO SER PARTE DE ESTA OPORTUNIDAD! COMO NOS DICE NUESTRO CREADOR DIOS JEHOVÁ:
-    </p>
+    <div id="mainContent" class="content-hidden">
+        <header>
+            <nav>
+                <a href="#top">Inicio</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Productos ▼</a>
+                    <div class="dropdown-content">
+                        <a href="#vid-life-section">VID-LIFE 60 CAP</a>
+                        <a href="#divi-her-section">Divi-her 60 CAP</a>
+                        <a href="#protec-life-section">PROTEC-LIFE 500GR</a>
+                        <a href="#protec-r-section">PROTEC R</a>
+                        <a href="#life-dig-section">LIFE-DIG 60 CAP</a>
+                        <a href="#gravi-life-section">GRAVI-LIFE 60 TAB</a>
+                        <a href="#maca-life-section">MACA-LIFE 60 CAP</a>
+                        <a href="#Jufre-life-section">JUFRE-LIFE 500GR</a>
+                    </div>
+                </div>
+                <a href="#oportunidad-section">Oportunidad de Negocio</a>
+                <a href="https://wa.me/573237917044?text=Hola,%20Gerardino.%20Me%20interesa%20obtener%20información%20general." target="_blank">Contacto (WhatsApp)</a>
+            </nav>
+            <h1>PORTAL DE VENTAS - GERARDINO JHON</h1>
+        </header>
 
-    <blockquote>
-      "La sabiduría es lo más importante, así que consigue sabiduría. Y, con todo lo que consigas, consigue entendimiento" – Proverbios 4:7
-    </blockquote>
+        <main>
+            <p>¡𝗕𝗜𝗘𝗡𝗩𝗘𝗡𝗜𝗗𝗢 𝗔 𝗧𝗨 𝗡𝗨𝗘𝗩𝗢 𝗣𝗢𝗥𝗧𝗔𝗟 𝗗𝗘 𝗕𝗜𝗘𝗡𝗘𝗦𝗧𝗔𝗥 𝗬 𝗢𝗣𝗢𝗥𝗧𝗨𝗡𝗜𝗗𝗔𝗗𝗘𝗦! 𝗦𝗢𝗬 𝗚𝗘𝗥𝗔𝗥𝗗𝗜𝗡𝗢 𝗝𝗛𝗢𝗡, 𝗘𝗟 𝗖𝗥𝗘𝗔𝗗𝗢𝗥 𝗗𝗘 𝗘𝗦𝗧𝗘 𝗘𝗦𝗣𝗔𝗖𝗜𝗢. 𝗔𝗤𝗨𝗜 𝗧𝗘 𝗣𝗥𝗘𝗦𝗘𝗡𝗧𝗢 𝗨𝗡𝗔 𝗦𝗘𝗟𝗘𝗖𝗖𝗜𝗢𝗡 𝗗𝗘 𝗣𝗥𝗢𝗗𝗨𝗖𝗧𝗢𝗦 𝗗𝗘 𝗠𝗨𝗬 𝗔𝗟𝗧𝗔 𝗖𝗔𝗟𝗜𝗗𝗔𝗗, 𝗖𝗢𝗠𝗢 𝗡𝗨𝗘𝗦𝗧𝗥𝗢 𝗗𝗘𝗦𝗧𝗔𝗖𝗔𝗗𝗢 𝗣𝗥𝗢𝗧𝗘𝗖-𝗟𝗜𝗙𝗘, 𝗣𝗘𝗡𝗦𝗔𝗗𝗢𝗦 𝗣𝗔𝗥𝗔 𝗣𝗢𝗧𝗘𝗡𝗖𝗜𝗔𝗥 𝗧𝗨 𝗦𝗔𝗟𝗨𝗗 𝗬 𝗩𝗜𝗧𝗔𝗟𝗜𝗗𝗔𝗗. 𝗘𝗫𝗣𝗟𝗢𝗥𝗔 𝗡𝗨𝗘𝗦𝗧𝗥𝗢𝗦 𝗣𝗥𝗢𝗗𝗨𝗖𝗧𝗢𝗦, 𝗗𝗘𝗦𝗖𝗨𝗕𝗥𝗘 𝗡𝗨𝗘𝗦𝗧𝗥𝗢𝗦 𝗦𝗘𝗥𝗩𝗜𝗖𝗜𝗢𝗦 𝗬, 𝗦𝗜 𝗧𝗘 𝗜𝗡𝗧𝗘𝗥𝗘𝗦𝗔, ¡𝗖𝗢𝗠𝗢 𝗦𝗘𝗥 𝗣𝗔𝗥𝗧𝗘 𝗗𝗘 𝗘𝗦𝗧𝗔 𝗢𝗣𝗢𝗥𝗧𝗨𝗡𝗜𝗗𝗔𝗗! 𝗖𝗢𝗠𝗢 𝗡𝗢𝗦 𝗗𝗜𝗖𝗘 𝗡𝗨𝗘𝗦𝗧𝗥𝗢 𝗖𝗥𝗘𝗔𝗗𝗢𝗥 𝗗𝗜𝗢𝗦 𝗝𝗘𝗛𝗢𝗩𝗔:
+            </p>
 
-    <h2>TENEMOS UNA FORMA DE HACER DINERO DE FORMA RÁPIDA Y MUY EFICAZ, ¡AQUÍ ESTÁ TU OPORTUNIDAD!</h2>
-    <img src="https://i.postimg.cc/9XxP91PT/logo-lifehuni-1-600x270.png" alt="Logo LifeHuni">
+            <blockquote>
+                "La sabiduría es lo más importante, así que consigue sabiduría. Y, con todo lo que consigas, consigue entendimiento" – Proverbios 4:7
+            </blockquote>
 
-    <h2>Nuestros Productos Destacados</h2>
+            <h2>TENEMOS UNA FORMA DE HACER DINERO DE FORMA RÁPIDA Y MUY EFICAZ, ¡AQUÍ ESTÁ TU OPORTUNIDAD!</h2>
+            <img src="https://i.postimg.cc/9XxP91PT/logo-lifehuni-1-600x270.png" alt="Logo LifeHuni">
+
+            <section id="oportunidad-section" class="product-item">
+                <h3>¡Tu Oportunidad de Negocio con Verde Vital!</h3>
+                <img src="https://i.postimg.cc/9XxP91PT/logo-lifehuni-1-600x270.png" alt="Logo LifeHuni - Oportunidad">
+                <p>
+                    En Verde Vital, no solo te ofrecemos productos de alta calidad, sino también la posibilidad de construir tu propio camino hacia la libertad financiera. Con nuestro modelo de negocio innovador, tienes la oportunidad de generar ingresos significativos distribuyendo productos que realmente mejoran la vida de las personas.
+                </p>
+                <h4>¿Por qué unirte a nosotros?</h4>
+                <ul>
+                    <li>**Productos de Impacto:** Ofrece soluciones de salud y bienestar que tus clientes amarán.</li>
+                    <li>**Flexibilidad Total:** Trabaja a tu propio ritmo, desde donde quieras y cuando quieras.</li>
+                    <li>**Ingresos Ilimitados:** Tu esfuerzo se traduce directamente en tus ganancias.</li>
+                    <li>**Soporte y Capacitación:** Te proporcionamos todas las herramientas y el conocimiento necesario para que tengas éxito.</li>
+                    <li>**Comunidad:** Forma parte de una red de emprendedores apasionados por el bienestar.</li>
+                </ul>
+                <p>
+                    ¡Es tu momento de tomar el control de tu futuro! Haz clic en el botón de abajo para más información y descubre cómo Verde Vital puede transformar tu vida.
+                </p>
+            </section>
+
+            <h2>Nuestros Productos Destacados</h2>
+
+            <section class="product-item" id="vid-life-section">
+                <h3>VID-LIFE 60 CAP</h3>
+                <img src="https://i.postimg.cc/MT0NKGZ8/Vid-life.jpg" alt="VID-LIFE 60 Cápsulas">
+                <button class="toggle-btn" onclick="toggleDetails('vid-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="vid-life"
+                        data-name="VID-LIFE 60 CAP"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="vid-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-description" class="sub-detail-content">
+                            <p>VID-LIFE 60 CAP es un suplemento dietario formulado para...</p>
+                            <p>Contenido Neto: 60 cápsulas.</p>
+                            <p>Fabricado en Colombia.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2012-0002444</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-ficha" class="sub-detail-content">
+                            <p>Aquí iría la información técnica detallada del producto VID-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Manténgalo fuera del alcance de los niños.</li>
+                                <li>Tómelo con las comidas, preferiblemente.</li>
+                                <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
+                                <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-more" class="sub-detail-content">
+                            <p>Algunos testimonios de usuarios satisfechos con VID-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="divi-her-section">
+                <h3>Divi-her 60 CAP</h3>
+                <img src="https://i.postimg.cc/MGQQwZMB/Divi-her-scaled.jpg" alt="Divi-her 60 Cápsulas">
+                <button class="toggle-btn" onclick="toggleDetails('divi-her-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="divi-her"
+                        data-name="Divi-her 60 CAP"
+                        data-price="85000">
+                    Añadir al Carrito
+                </button>
+
+                <div id="divi-her-details" class="details-content">
+                    <p><strong>Precio:</strong> $85.000 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-description" class="sub-detail-content">
+                            <p>Divi-her 60 CAP es un suplemento dietario diseñado para ayudar en procesos de bienestar y control de peso. Contiene una mezcla de ingredientes naturales que pueden contribuir a la sensación de saciedad y al metabolismo.</p>
+                            <p>Contenido Neto: 60 cápsulas.</p>
+                            <p>Fabricado en Colombia.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-invima" class="sub-detail-content">
+                            <p>Registro INVIMA N°. SD2021-0001401 R1</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-ficha" class="sub-detail-content">
+                            <p>Aquí iría la información técnica detallada del producto Divi-her.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Manténgalo fuera del alcance de los niños.</li>
+                                <li>Tómelo con las comidas, preferiblemente.</li>
+                                <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
+                                <li>Este producto es un suplemento dietario. No es un medicamento y no suple una alimentación equilibrada.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-more" class="sub-detail-content">
+                            <p>Descubre lo que nuestros clientes opinan sobre Divi-her.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="protec-life-section">
+                <h3>PROTEC-LIFE 500GR</h3>
+                <img src="https://i.postimg.cc/kgMS8sbL/PWEB-Protec-life-sesion-web.jpg" alt="PROTEC-LIFE">
+                <button class="toggle-btn" onclick="toggleDetails('protec-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="protec-life"
+                        data-name="PROTEC-LIFE 500GR"
+                        data-price="130780">
+                    Añadir al Carrito
+                </button>
+
+                <div id="protec-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $130.780 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-description" class="sub-detail-content">
+                            <p>PROTEC-LIFE 500GR es un suplemento alimenticio en polvo con sabor a fresa y vainilla...</p>
+                            <p>Presentación: Frasco por 500 Gr.</p>
+                            <p>Fabricado en Colombia.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2012-0002461</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-ficha" class="sub-detail-content">
+                            <p>Información detallada de los componentes y beneficios de PROTEC-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Consérvelo fuera del alcance de los niños.</li>
+                                <li>Tómelo con las comidas, preferiblemente.</li>
+                                <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
+                                <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
+                                <li>Conserve el producto bien cerrado para protegerlo de la humedad.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-more" class="sub-detail-content">
+                            <p>Casos de éxito y beneficios de PROTEC-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="protec-r-section">
+                <h3>PROTEC R</h3>
+                <img src="https://i.postimg.cc/G2MRvMm8/Protec-R-COL-2024-312x312.png" alt="PROTEC R">
+                <button class="toggle-btn" onclick="toggleDetails('protec-r-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="protec-r"
+                        data-name="PROTEC R"
+                        data-price="105049">
+                    Añadir al Carrito
+                </button>
+
+                <div id="protec-r-details" class="details-content">
+                    <p><strong>Precio:</strong> $105.049 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-description" class="sub-detail-content">
+                            <p>PROTEC R viene en dosis individuales que facilitan su preparación rápida. Perfecto para disfrutar en forma de bebida caliente.</p>
+                            <p>Caja por: 25 unidades</p>
+                            <p>Sachet: 6 GR</p>
+                            <p>Sabor: Frutos rojos y piña.</p>
+                            <p>Fabricado en Colombia.</p>
+                            <p>No contiene edulcorantes, ni azúcares adicionados que generen sellos de advertencia.</p>
+                            <p>Contiene una mezcla de vitaminas y minerales. Elaborado con ingredientes naturales.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-invima" class="sub-detail-content">
+                            <h4>Registros INVIMA:</h4>
+                            <ul>
+                                <li><strong>PIÑA:</strong> N°. NSA-0015860-2024 Var 1</li>
+                                <li><strong>FRUTOS ROJOS:</strong> N°. NSA-0015860-2024 Var 2</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-ficha" class="sub-detail-content">
+                            <p>Detalles técnicos sobre la composición de PROTEC R.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Mantenga el producto fuera del alcance de los niños.</li>
+                                <li>No es un medicamento y no suple una alimentación equilibrada.</li>
+                                <li>Una vez abierto, consumir en el menor tiempo posible.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-more" class="sub-detail-content">
+                            <p>Lo que dicen nuestros clientes sobre PROTEC R.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="life-dig-section">
+                <h3>LIFE-DIG 60 CAP</h3>
+                <img src="https://i.postimg.cc/XJp1L1FC/Life-Dig-Mesa-de-trabajo-1-2.jpg" alt="LIFE-DIG">
+                <button class="toggle-btn" onclick="toggleDetails('life-dig-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="life-dig"
+                        data-name="LIFE-DIG 60 CAP"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="life-dig-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-description" class="sub-detail-content">
+                            <p>LIFE-DIG 60 CAP está diseñado para mejorar el tránsito intestinal.</p>
+                            <p>Contenido Neto: 60 cápsulas.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2018-0004231</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-ficha" class="sub-detail-content">
+                            <p>Detalles sobre los ingredientes y beneficios específicos de LIFE-DIG.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conserve en lugar seco.</li>
+                                <li>Consulte a su médico si aplica.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-more" class="sub-detail-content">
+                            <p>Experiencias de usuarios con LIFE-DIG.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="gravi-life-section">
+                <h3>GRAVI-LIFE 60 TAB</h3>
+                <img src="https://i.postimg.cc/SQz5z1D3/Gravi-Life-Mesa-de-trabajo-1-3.jpg" alt="GRAVI-LIFE">
+                <button class="toggle-btn" onclick="toggleDetails('gravi-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="gravi-life"
+                        data-name="GRAVI-LIFE 60 TAB"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="gravi-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-description" class="sub-detail-content">
+                            <p>GRAVI-LIFE 60 TAB es un suplemento en tabletas formulado para...</p>
+                            <p>Contenido Neto: 60 tabletas.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2018-0004239</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-ficha" class="sub-detail-content">
+                            <p>Información detallada de GRAVI-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conserve en lugar fresco.</li>
+                                <li>Consulte a su médico si necesita.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-more" class="sub-detail-content">
+                            <p>Opiniones de clientes sobre GRAVI-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="maca-life-section">
+                <h3>MACA-LIFE 60 CAP</h3>
+                <img src="https://i.postimg.cc/xqDtLyD8/Maca-life-scaled.jpg" alt="MACA-LIFE">
+                <button class="toggle-btn" onclick="toggleDetails('maca-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="maca-life"
+                        data-name="MACA-LIFE 60 CAP"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="maca-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-description" class="sub-detail-content">
+                            <p>MACA-LIFE 60 CAP es un suplemento a base de maca, conocida por sus propiedades energizantes...</p>
+                            <p>Contenido Neto: 60 cápsulas.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2018-0004239</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-ficha" class="sub-detail-content">
+                            <p>Información detallada de los ingredientes y beneficios de MACA-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conservar en lugar fresco y seco.</li>
+                                <li>Consulte a su médico si es necesario.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-more" class="sub-detail-content">
+                            <p>Experiencias de usuarios con MACA-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="Jufre-life-section">
+                <h3>JUFRE-LIFE 500GR</h3>
+                <img src="https://i.postimg.cc/sfHKWLKz/Jufres-3-scaled.jpg" alt="JUFRE-LIFE">
+                <button class="toggle-btn" onclick="toggleDetails('jufre-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="jufre-life"
+                        data-name="JUFRE-LIFE 500GR"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="jufre-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-description" class="sub-detail-content">
+                            <p>JUFRE-LIFE 500GR es un suplemento en polvo que contribuye a...</p>
+                            <p>Contenido Neto: 500 Gr.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2012-0002461</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-ficha" class="sub-detail-content">
+                            <p>Detalles técnicos sobre la composición de JUFRE-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conservar en lugar fresco.</li>
+                                <li>Consulte a su médico si es necesario.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-more" class="sub-detail-content">
+                            <p>Lo que dicen nuestros clientes sobre JUFRE-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Todos los derechos reservados &copy; 2025</p>
+            <p>Página Original & Auténtica</p>
+        </footer>
+    </div>
+
+    <a href="https://wa.me/573237917044?text=¡Hola,%20Gerardino!%20Me%20interesan%20los%20productos%20de%20Verde%20Vital." class="whatsapp-float" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 7.6 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 7.6-7.6 8.38 8.38 0 0 1 3.8.9L21 3l-1.9 5.7z"></path><path d="M11 15.5V12h3.5l-3 4-3-4h3.5v3.5L11 15.5z"></path></svg>
+    </a>
+
+    <div class="cart-icon" onclick="openShoppingCart()">
+        🛒 <span class="cart-count" id="cart-item-count">0</span>
+    </div>
+
+    <div id="shoppingCartModal" class="shopping-cart-modal">
+        <div class="shopping-cart-content">
+            <span class="close-cart-btn" onclick="closeShoppingCart()">&times;</span>
+            <h2>Tu Carrito de Compras</h2>
+            <ul id="cart-items-list"></ul>
+            <p id="cart-total">Total: $0.00 COP</p>
+            <button class="checkout-button" onclick="checkout()">Proceder al Pago (WhatsApp)</button>
+        </div>
+    </div>
+
+    <script>
+        // --- Lógica de la Puerta de Entrada ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const entranceDoor = document.getElementById('entranceDoor');
+            const enterButton = document.getElementById('enterButton');
+            const mainContent = document.getElementById('mainContent');
+
+            enterButton.addEventListener('click', () => {
+                entranceDoor.classList.add('hide-door');
+                entranceDoor.addEventListener('transitionend', () => {
+                    entranceDoor.style.display = 'none'; // Oculta completamente después de la transición
+                    mainContent.classList.remove('content-hidden');
+                    mainContent.classList.add('content-visible');
+                    // Opcional: Desplaza al inicio del contenido principal
+                    mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, { once: true }); // Asegura que el evento se dispare solo una vez
+            });
+
+            // Si quieres que el contenido principal sea visible por defecto sin la puerta,
+            // puedes comentar o eliminar el bloque 'DOMContentLoaded' y las clases 'content-hidden'
+            // y 'content-visible' de tu HTML.
+        });
 
 
-    <section class="product-item" id="vid-life-section">
-      <h3>VID-LIFE 60 CAP</h3>
-      <img src="https://i.postimg.cc/MT0NKGZ8/Vid-life.jpg" alt="VID-LIFE 60 Cápsulas">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Contenido:</strong> 60 cápsulas.</p>
-      <p><strong>Registro INVIMA:</strong> SD2012-0002444</p>
-      <h4>Recomendaciones:</h4>
-      <ul>
-        <li>Siga instrucciones de uso.</li>
-        <li>Conserve en lugar fresco y seco.</li>
-        <li>Manténgalo fuera del alcance de los niños.</li>
-        <li>Tómelo con las comidas.</li>
-        <li>Consulte a su médico si tiene condiciones especiales.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20VID-LIFE%2060%20CAP" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
+        // --- Lógica de Mostrar/Ocultar Detalles de Productos (toggle-btn) ---
+        function toggleDetails(contentId, button) {
+            const content = document.getElementById(contentId);
+            if (content) {
+                content.classList.toggle('show');
+                if (content.classList.contains('show')) {
+                    button.textContent = '▲ Ocultar detalles';
+                } else {
+                    button.textContent = '🔽 Ver más detalles';
+                }
+            }
+        }
 
+        // --- Lógica de Mostrar/Ocultar Sub-detalles (acordeón) ---
+        function toggleSubDetails(contentId, header) {
+            const content = document.getElementById(contentId);
+            const arrow = header.querySelector('.arrow');
+            if (content) {
+                content.classList.toggle('show-sub');
+                header.classList.toggle('active'); // Para rotar la flecha
+            }
+        }
 
-    <section class="product-item" id="protec-life-section">
-      <h3>PROTEC-LIFE 500GR</h3>
-      <img src="https://i.postimg.cc/kgMS8sbL/PWEB-Protec-life-sesion-web.jpg" alt="PROTEC-LIFE">
-      <p><strong>Precio:</strong> $130.780 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2012-0002461</p>
-      <ul>
-        <li>Conserve en lugar fresco y seco.</li>
-        <li>Manténgalo alejado del alcance de los niños.</li>
-        <li>Tómelo con las comidas.</li>
-        <li>Consulte a su médico si lo necesita.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20PROTEC-LIFE%20500GR" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
+        // --- Lógica del Carrito de Compras ---
+        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || []; // Cargar carrito del almacenamiento local
+        const cartItemsList = document.getElementById('cart-items-list');
+        const cartTotalElement = document.getElementById('cart-total');
+        const cartItemCountElement = document.getElementById('cart-item-count');
+        const shoppingCartModal = document.getElementById('shoppingCartModal');
 
-  
-    <section class="product-item" id="protec-r-section">
-      <h3>PROTEC R</h3>
-      <img src="https://i.postimg.cc/G2MRvMm8/Protec-R-COL-2024-312x312.png" alt="PROTEC R">
-      <p><strong>Precio:</strong> $105.049 COP</p>
-      <p><strong>Registro INVIMA:</strong> NSA-0015860-2024</p>
-      <ul>
-        <li>Cadena de conservación adecuada.</li>
-        <li>Conservar en lugar fresco.</li>
-        <li>Consulte a su médico si es necesario.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20PROTEC%20R" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
+        // Función para formatear precios a COP
+        function formatPrice(price) {
+            return new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0, // No mostrar decimales para COP si no son necesarios
+                maximumFractionDigits: 0,
+            }).format(price);
+        }
 
-    
-    <section class="product-item" id="life-dig-section">
-      <h3>LIFE-DIG 60 CAP</h3>
-      <img src="https://i.postimg.cc/XJp1L1FC/Life-Dig-Mesa-de-trabajo-1-2.jpg" alt="LIFE-DIG">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2018-0004231</p>
-      <ul>
-        <li>Mejora tránsito intestinal.</li>
-        <li>Conserve en lugar seco.</li>
-        <li>Consulte a su médico si aplica.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20LIFE-DIG%2060%20CAP" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
+        function updateCartDisplay() {
+            cartItemsList.innerHTML = '';
+            let total = 0;
 
-  
-    <section class="product-item" id="gravi-life-section">
-      <h3>GRAVI-LIFE 60 TAB</h3>
-      <img src="https://i.postimg.cc/SQz5z1D3/Gravi-Life-Mesa-de-trabajo-1-3.jpg" alt="GRAVI-LIFE">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2018-0004239</p>
-      <ul>
-        <li>Conserve en lugar fresco.</li>
-        <li>Consulte a su médico si necesita.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20GRAVI-LIFE%2060%20TAB" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<li class="empty-cart-message">El carrito está vacío.</li>';
+            } else {
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <div class="cart-item-info">
+                            ${item.name} <br>
+                            <small>${formatPrice(item.price)} x ${item.quantity}</small>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button onclick="changeQuantity('${item.id}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="changeQuantity('${item.id}', 1)">+</button>
+                            <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">Eliminar</button>
+                        </div>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                    total += item.price * item.quantity;
+                });
+            }
 
-  
-    <section class="product-item" id="maca-life-section">
-      <h3>MACA-LIFE 60 CAP</h3>
-      <img src="https://i.postimg.cc/xqDtLyD8/Maca-life-scaled.jpg" alt="MACA-LIFE">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2018-0004239</p>
-      <ul>
-        <li>Conservar en lugar fresco y seco.</li>
-        <li>Consulte a su médico si es necesario.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20MACA-LIFE%2060%20CAP" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
+            cartTotalElement.textContent = `Total: ${formatPrice(total)}`;
+            cartItemCountElement.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-    
-    <section class="product-item" id="Jufre-life-section">
-      <h3>JUFRE-LIFE 500GR</h3>
-      <img src="https://i.postimg.cc/sfHKWLKz/Jufres-3-scaled.jpg" alt="JUFRE-LIFE">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2012-0002461</p>
-      <ul>
-        <li>Conservar en lugar fresco.</li>
-        <li>Consulte a su médico si es necesario.</li>
-      </ul>
-      <a href="https://wa.me/573053443361?text=Hola,%20me%20interesa%20JUFRE-LIFE%20500GR" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
-  </main>
+            // Guardar carrito en almacenamiento local
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+        }
 
-  <footer>
-    <p>Todos los derechos reservados &copy; 2025</p>
-    <p>Página Original & Auténtica</p>
-  </footer>
+        function addToCart(event) {
+            const button = event.target;
+            const id = button.dataset.id;
+            const name = button.dataset.name;
+            const price = parseFloat(button.dataset.price);
 
-</body>
-</html><!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <title>PORTAL DE VENTAS - VERDE VITAL</title>
-  <link rel="icon" href="/favicon-96x96.png" type="image/png">
-  <style>
-    :root {
-      --main-color: #0077cc;
-      --secondary-color: #2ecc71;
-      --accent-color: #e74c3c;
-      --background-light: #ecf0f1;
-      --text-dark: #2c3e50;
-      --whatsapp-green: #25D366;
-      --whatsapp-green-dark: #1DA851;
-      --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
-      --border-radius: 8px;
-    }
+            const existingItemIndex = cart.findIndex(item => item.id === id);
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: var(--background-light);
-      color: var(--text-dark);
-    }
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity++;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+            updateCartDisplay();
+        }
 
-    header, main, footer {
-      max-width: 960px;
-      margin: 40px auto;
-      padding: 40px;
-      background: #fff;
-      box-shadow: var(--shadow-light);
-      border-radius: var(--border-radius);
-    }
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartDisplay();
+        }
 
-    header nav {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        function changeQuantity(id, change) {
+            const itemIndex = cart.findIndex(item => item.id === id);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity += change;
+                if (cart[itemIndex].quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    updateCartDisplay();
+                }
+            }
+        }
 
-    header nav a {
-      margin: 0 15px;
-      font-weight: bold;
-      color: var(--main-color);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+        function openShoppingCart() {
+            shoppingCartModal.style.display = 'flex'; // Usar 'flex' para centrar
+            updateCartDisplay(); // Asegúrate de que el carrito se actualice al abrir
+        }
 
-    header nav a:hover {
-      color: var(--accent-color);
-    }
+        function closeShoppingCart() {
+            shoppingCartModal.style.display = 'none';
+        }
 
-    h1 {
-      text-align: center;
-      color: var(--main-color);
-      margin-top: 0;
-    }
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío. Por favor, añade algunos productos antes de proceder al pago.');
+                return;
+            }
 
-    h2 {
-      text-align: center;
-      color: #ff4500;
-      margin: 40px 0 20px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    }
+            let message = "¡Hola, Gerardo! Me gustaría realizar un pedido con los siguientes productos:\n\n";
+            let total = 0;
 
-    p {
-      font-size: 1.1em;
-      margin-bottom: 20px;
-      text-align: justify;
-    }
+            cart.forEach(item => {
+                message += `- ${item.name} (Cantidad: ${item.quantity}) - ${formatPrice(item.price * item.quantity)}\n`;
+                total += item.price * item.quantity;
+            });
 
-    .product-item {
-      background: #fff;
-      padding: 30px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow-light);
-      margin-bottom: 30px;
-    }
+            message += `\nTotal a pagar: ${formatPrice(total)}\n`;
+            message += "Por favor, indícame cómo puedo proceder con el pago y el envío. ¡Gracias!";
 
-    .product-item h3 {
-      margin-top: 0;
-      color: var(--main-color);
-    }
+            const whatsappUrl = `https://wa.me/573237917044?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
 
-    .product-item img {
-      max-width: 100%;
-      border: 3px solid var(--main-color);
-      border-radius: var(--border-radius);
-      display: block;
-      margin: 20px auto;
-    }
+            // Opcional: Vaciar el carrito después de enviar el pedido
+            // cart = [];
+            // updateCartDisplay();
+            // closeShoppingCart();
+        }
 
-    .product-item p { margin: 10px 0; }
-    .product-item ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 10px 0;
-    }
+        // Asignar los event listeners a los botones "Añadir al Carrito"
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', addToCart);
+        });
 
-    .product-item ul li {
-      padding-left: 20px;
-      position: relative;
-      margin-bottom: 8px;
-    }
+        // Inicializar el contador del carrito al cargar la página
+        updateCartDisplay();
 
-    .product-item ul li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--secondary-color);
-    }
+        // Cerrar el modal haciendo clic fuera de su contenido
+        window.onclick = function(event) {
+            if (event.target == shoppingCartModal) {
+                closeShoppingCart();
+            }
+        }
 
-    .product-item a.whatsapp-btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: var(--whatsapp-green);
-      color: #fff;
-      text-decoration: none;
-      border-radius: var(--border-radius);
-      font-weight: bold;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-
-    .product-item a.whatsapp-btn:hover {
-      background-color: var(--whatsapp-green-dark);
-      transform: translateY(-2px);
-    }
-
-    iframe {
-      width: 100%;
-      height: 480px;
-      border: none;
-      border-radius: var(--border-radius);
-      display: block;
-      margin: 40px 0;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: rgba(44, 62, 80, 0.8);
-    }
-
-    /* WhatsApp flotante */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: var(--whatsapp-green);
-      color: #fff;
-      padding: 16px 20px;
-      border-radius: 50px;
-      font-size: 20px;
-      text-decoration: none;
-      box-shadow: var(--shadow-light);
-      transition: transform 0.3s;
-      z-index: 1000;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <nav>
-      <a href="https://www.facebook.com/jhon.gerardiino" target="_blank">Facebook</a>
-      <a href="https://www.atomy.com/co/Home/Account/Login" target="_blank">Atomy Colombia</a>
-      <a href="https://www.tiktok.com/@charranet" target="_blank">TikTok</a>
-    </nav>
-    <h1>PORTAL DE VENTAS - GERARDINO JHON</h1>
-  </header>
-
-  <main>
-    <p>
-      ¡BIENVENIDO A TU NUEVO PORTAL DE BIENESTAR Y OPORTUNIDADES! SOY <strong>GERARDINO JHON</strong>, EL CREADOR DE ESTE ESPACIO. AQUÍ TE PRESENTO UNA SELECCIÓN DE PRODUCTOS DE MUY ALTA CALIDAD, COMO NUESTRO DESTACADO <strong>PROTEC-LIFE</strong>, PENSADOS PARA POTENCIAR TU SALUD Y VITALIDAD. EXPLORA NUESTROS PRODUCTOS, DESCUBRE NUESTROS SERVICIOS Y, SI TE INTERESA, ¡CÓMO SER PARTE DE ESTA OPORTUNIDAD! COMO NOS DICE NUESTRO CREADOR DIOS JEHOVÁ:
-    </p>
-
-    <blockquote>
-      "La sabiduría es lo más importante, así que consigue sabiduría. Y, con todo lo que consigas, consigue entendimiento" – Proverbios 4:7
-    </blockquote>
-
-    <h2>TENEMOS UNA FORMA DE HACER DINERO DE FORMA RÁPIDA Y MUY EFICAZ, ¡AQUÍ ESTÁ TU OPORTUNIDAD!</h2>
-    <img src="https://i.postimg.cc/9XxP91PT/logo-lifehuni-1-600x270.png" alt="Logo LifeHuni">
-
-    <h2>Nuestros Productos Destacados</h2>
-
-
-    <section class="product-item" id="vid-life-section">
-      <h3>VID-LIFE 60 CAP</h3>
-      <img src="https://i.postimg.cc/MT0NKGZ8/Vid-life.jpg" alt="VID-LIFE 60 Cápsulas">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Contenido:</strong> 60 cápsulas.</p>
-      <p><strong>Registro INVIMA:</strong> SD2012-0002444</p>
-      <h4>Recomendaciones:</h4>
-      <ul>
-        <li>Siga instrucciones de uso.</li>
-        <li>Conserve en lugar fresco y seco.</li>
-        <li>Manténgalo fuera del alcance de los niños.</li>
-        <li>Tómelo con las comidas.</li>
-        <li>Consulte a su médico si tiene condiciones especiales.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20VID-LIFE%2060%20CAP" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
-
-
-    <section class="product-item" id="protec-life-section">
-      <h3>PROTEC-LIFE 500GR</h3>
-      <img src="https://i.postimg.cc/kgMS8sbL/PWEB-Protec-life-sesion-web.jpg" alt="PROTEC-LIFE">
-      <p><strong>Precio:</strong> $130.780 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2012-0002461</p>
-      <ul>
-        <li>Conserve en lugar fresco y seco.</li>
-        <li>Manténgalo alejado del alcance de los niños.</li>
-        <li>Tómelo con las comidas.</li>
-        <li>Consulte a su médico si lo necesita.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20PROTEC-LIFE%20500GR" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
-
-  
-    <section class="product-item" id="protec-r-section">
-      <h3>PROTEC R</h3>
-      <img src="https://i.postimg.cc/G2MRvMm8/Protec-R-COL-2024-312x312.png" alt="PROTEC R">
-      <p><strong>Precio:</strong> $105.049 COP</p>
-      <p><strong>Registro INVIMA:</strong> NSA-0015860-2024</p>
-      <ul>
-        <li>Cadena de conservación adecuada.</li>
-        <li>Conservar en lugar fresco.</li>
-        <li>Consulte a su médico si es necesario.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20PROTEC%20R" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
-
-    
-    <section class="product-item" id="life-dig-section">
-      <h3>LIFE-DIG 60 CAP</h3>
-      <img src="https://i.postimg.cc/XJp1L1FC/Life-Dig-Mesa-de-trabajo-1-2.jpg" alt="LIFE-DIG">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2018-0004231</p>
-      <ul>
-        <li>Mejora tránsito intestinal.</li>
-        <li>Conserve en lugar seco.</li>
-        <li>Consulte a su médico si aplica.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20LIFE-DIG%2060%20CAP" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
-
-  
-    <section class="product-item" id="gravi-life-section">
-      <h3>GRAVI-LIFE 60 TAB</h3>
-      <img src="https://i.postimg.cc/SQz5z1D3/Gravi-Life-Mesa-de-trabajo-1-3.jpg" alt="GRAVI-LIFE">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2018-0004239</p>
-      <ul>
-        <li>Conserve en lugar fresco.</li>
-        <li>Consulte a su médico si necesita.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20GRAVI-LIFE%2060%20TAB" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
-
-  
-    <section class="product-item" id="maca-life-section">
-      <h3>MACA-LIFE 60 CAP</h3>
-      <img src="https://i.postimg.cc/xqDtLyD8/Maca-life-scaled.jpg" alt="MACA-LIFE">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2018-0004239</p>
-      <ul>
-        <li>Conservar en lugar fresco y seco.</li>
-        <li>Consulte a su médico si es necesario.</li>
-      </ul>
-      <a href="https://wa.me/573237917044?text=Hola,%20me%20interesa%20MACA-LIFE%2060%20CAP" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
-
-    
-    <section class="product-item" id="Jufre-life-section">
-      <h3>JUFRE-LIFE 500GR</h3>
-      <img src="https://i.postimg.cc/sfHKWLKz/Jufres-3-scaled.jpg" alt="JUFRE-LIFE">
-      <p><strong>Precio:</strong> $81.738 COP</p>
-      <p><strong>Registro INVIMA:</strong> SD2012-0002461</p>
-      <ul>
-        <li>Conservar en lugar fresco.</li>
-        <li>Consulte a su médico si es necesario.</li>
-      </ul>
-      <a href="https://wa.me/573053443361?text=Hola,%20me%20interesa%20JUFRE-LIFE%20500GR" class="whatsapp-btn" target="_blank">
-        Comprar o info por WhatsApp
-      </a>
-    </section>
-  </main>
-
-  <footer>
-    <p>Todos los derechos reservados &copy; 2025</p>
-    <p>Página Original & Auténtica</p>
-  </footer>
-
+    </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTAL DE VENTAS - VERDE VITAL</title>
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <style>
+        :root {
+            --main-color: #0077cc; /* Azul vibrante */
+            --secondary-color: #2ecc71; /* Verde esmeralda */
+            --accent-color: #e74c3c; /* Rojo para acentos/advertencias */
+            --background-light: #ecf0f1; /* Gris claro de fondo */
+            --text-dark: #2c3e50; /* Gris oscuro para texto */
+            --whatsapp-green: #25D366; /* Verde WhatsApp */
+            --whatsapp-green-dark: #1DA851; /* Verde WhatsApp más oscuro */
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --button-hover-brightness: 1.1; /* Ligero brillo al pasar el ratón */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            max-width: 960px;
+            margin: 40px auto 20px auto; /* Ajuste margen inferior */
+            padding: 40px;
+            background: #fff;
+            box-shadow: var(--shadow-light);
+            border-radius: var(--border-radius);
+            position: relative; /* Asegura que z-index funcione en nav si fuera necesario */
+            z-index: 100; /* Z-index para asegurar que el header esté sobre el contenido */
+        }
+
+        main, footer {
+            max-width: 960px;
+            margin: 20px auto 40px auto; /* Ajuste margen superior */
+            padding: 40px;
+            background: #fff;
+            box-shadow: var(--shadow-light);
+            border-radius: var(--border-radius);
+            z-index: 1; /* z-index base para el contenido principal */
+        }
+
+        header nav {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        header nav a, .dropbtn {
+            font-weight: 600;
+            color: var(--main-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        header nav a:hover, .dropbtn:hover {
+            color: white;
+            background-color: var(--main-color);
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--main-color);
+            margin-top: 0;
+            font-size: 2.5em;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--accent-color);
+            margin: 40px 0 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-size: 2em;
+        }
+
+        h3 {
+            color: var(--main-color);
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.05em;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        blockquote {
+            background-color: #f0f8ff;
+            border-left: 5px solid var(--secondary-color);
+            margin: 20px 0;
+            padding: 15px 20px;
+            font-style: italic;
+            color: #555;
+            border-radius: var(--border-radius);
+        }
+
+        .product-item {
+            background: #fff;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-bottom: 30px;
+        }
+
+        .product-item img {
+            max-width: 100%;
+            border: 3px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            display: block;
+            margin: 25px auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-item ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 10px 0;
+        }
+
+        .product-item ul li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .product-item ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .toggle-btn {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 15px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .details-content {
+            display: none;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        .details-content.show {
+            display: block;
+        }
+
+        .sub-detail-section {
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 18px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .sub-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--main-color);
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .sub-detail-header:hover {
+            color: var(--secondary-color);
+        }
+
+        .sub-detail-header .arrow {
+            font-size: 1.3em;
+            transition: transform 0.3s ease;
+            color: var(--secondary-color);
+        }
+
+        .sub-detail-header.active .arrow {
+            transform: rotate(180deg);
+            color: var(--accent-color);
+        }
+
+        .sub-detail-content {
+            display: none;
+            padding-top: 18px;
+            line-height: 1.6;
+        }
+
+        .sub-detail-content.show-sub {
+            display: block;
+        }
+
+        iframe {
+            width: 100%;
+            height: 480px;
+            border: none;
+            border-radius: var(--border-radius);
+            display: block;
+            margin: 40px 0;
+            box-shadow: var(--shadow-light);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: rgba(44, 62, 80, 0.8);
+            margin-top: 60px;
+            padding: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        /* WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp-green);
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 50px;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 9999; /* z-index estándar, debajo del modal */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-3px);
+            background-color: var(--whatsapp-green-dark);
+        }
+
+        /* Carrito flotante */
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow-light);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998; /* z-index estándar, debajo del modal */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cart-icon:hover {
+            background-color: #28a745;
+            transform: scale(1.05);
+        }
+
+        .cart-count {
+            font-size: 0.8em;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            padding: 3px 7px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* Modal del Carrito de Compras */
+        .shopping-cart-modal {
+            display: none; /* Asegúrate de que esto esté aquí por defecto */
+            position: fixed;
+            z-index: 10000; /* El más alto para que siempre esté encima de todo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7); /* Ligeramente más oscuro para superposición */
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out; /* Animación de entrada */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .shopping-cart-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #888;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            animation: fadeInScale 0.3s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-cart-btn {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-cart-btn:hover,
+        .close-cart-btn:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        #cart-items-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        #cart-items-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        #cart-items-list li:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+            font-size: 1.05em;
+        }
+
+        .cart-item-info small {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-item-actions button {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s ease;
+        }
+
+        .cart-item-actions button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .cart-item-remove {
+            background-color: var(--accent-color) !important;
+        }
+
+        .cart-item-remove:hover {
+            background-color: #c0392b !important;
+        }
+
+        #cart-total {
+            text-align: right;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 25px;
+            padding-top: 18px;
+            border-top: 2px solid var(--main-color);
+            color: var(--text-dark);
+        }
+
+        .add-to-cart-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            width: fit-content;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--whatsapp-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .checkout-button {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .checkout-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            color: #777;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Estilos para el menú desplegable (dropdown) */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 101; /* Z-index para que esté por encima del header y contenido */
+            border-radius: var(--border-radius);
+            left: 50%;
+            transform: translateX(-50%);
+            top: calc(100% + 5px);
+            padding: 8px 0;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .dropdown-content a {
+            color: var(--text-dark);
+            padding: 12px 18px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s, color 0.2s;
+            font-weight: normal;
+            margin: 0;
+            border-radius: var(--border-radius);
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--main-color);
+            color: white;
+        }
+
+        /* Mostrar el menú desplegable al pasar el ratón */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* MEDIA QUERIES PARA RESPONSIVIDAD */
+        @media (max-width: 768px) {
+            header, main, footer {
+                margin: 20px auto;
+                padding: 20px;
+            }
+
+            header nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            header nav a, .dropbtn {
+                padding: 8px 10px;
+                font-size: 0.95em;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .product-item {
+                padding: 20px;
+            }
+
+            .sub-detail-section {
+                padding: 15px;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 16px;
+                font-size: 18px;
+            }
+
+            .cart-icon {
+                top: 15px;
+                right: 20px;
+                padding: 10px 13px;
+                font-size: 0.9em;
+            }
+
+            .shopping-cart-content {
+                width: 95%;
+                padding: 20px;
+            }
+
+            #cart-items-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 0;
+            }
+
+            .cart-item-actions {
+                margin-top: 10px;
+                justify-content: flex-end;
+                width: 100%;
+            }
+        }
+
+        /* NUEVA SECCIÓN DE ESTILOS PARA LA PUERTA DE ENTRADA */
+        .entrance-door {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--main-color); /* Color principal */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10003; /* ¡MUY ALTO! para asegurar que cubre todo */
+            color: white;
+            text-align: center;
+            opacity: 1; /* Inicia visible */
+            transition: opacity 0.5s ease; /* Transición suave para cuando desaparece */
+        }
+
+        .entrance-door.hide-door {
+            opacity: 0;
+        }
+
+        .entrance-door h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: white; /* Asegura que el título sea blanco */
+        }
+
+        .entrance-door button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: var(--border-radius);
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .entrance-door button:hover {
+            background-color: var(--whatsapp-green-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        }
+
+        /* CLASES PARA EL CONTENIDO PRINCIPAL Y SU VISIBILIDAD */
+        .content-hidden {
+            display: none; /* Oculta el contenido principal por defecto */
+        }
+
+        .content-visible {
+            display: block; /* Muestra el contenido principal */
+            animation: fadeInContent 1s ease-out forwards; /* Animación de entrada */
+        }
+
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* FIN NUEVA SECCIÓN DE ESTILOS */
+    </style>
+</head>
+<body id="top">
+
+    <div id="entranceDoor" class="entrance-door">
+        <h2>PORTAL DE VENTAS</h2>
+        <button id="enterButton">ENTRAR</button>
+    </div>
+
+    <div id="mainContent" class="content-hidden">
+        <header>
+            <nav>
+                <a href="#top">Inicio</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Productos ▼</a>
+                    <div class="dropdown-content">
+                        <a href="#vid-life-section">VID-LIFE 60 CAP</a>
+                        <a href="#divi-her-section">Divi-her 60 CAP</a>
+                        <a href="#protec-life-section">PROTEC-LIFE 500GR</a>
+                        <a href="#protec-r-section">PROTEC R</a>
+                        <a href="#life-dig-section">LIFE-DIG 60 CAP</a>
+                        <a href="#gravi-life-section">GRAVI-LIFE 60 TAB</a>
+                        <a href="#maca-life-section">MACA-LIFE 60 CAP</a>
+                        <a href="#Jufre-life-section">JUFRE-LIFE 500GR</a>
+                    </div>
+                </div>
+                <a href="#oportunidad-section">Oportunidad de Negocio</a>
+                <a href="https://wa.me/573237917044?text=Hola,%20Gerardino.%20Me%20interesa%20obtener%20información%20general." target="_blank">Contacto (WhatsApp)</a>
+            </nav>
+            <h1>PORTAL DE VENTAS - GERARDINO JHON</h1>
+        </header>
+
+        <main>
+            <p>¡𝗕𝗜𝗘𝗡𝗩𝗘𝗡𝗜𝗗𝗢 𝗔 𝗧𝗨 𝗡𝗨𝗘𝗩𝗢 𝗣𝗢𝗥𝗧𝗔𝗟 𝗗𝗘 𝗕𝗜𝗘𝗡𝗘𝗦𝗧𝗔𝗥 𝗬 𝗢𝗣𝗢𝗥𝗧𝗨𝗡𝗜𝗗𝗔𝗗𝗘𝗦! 𝗦𝗢𝗬 𝗚𝗘𝗥𝗔𝗥𝗗𝗜𝗡𝗢 𝗝𝗛𝗢𝗡, 𝗘𝗟 𝗖𝗥𝗘𝗔𝗗𝗢𝗥 𝗗𝗘 𝗘𝗦𝗧𝗘 𝗘𝗦𝗣𝗔𝗖𝗜𝗢. 𝗔𝗤𝗨𝗜 𝗧𝗘 𝗣𝗥𝗘𝗦𝗘𝗡𝗧𝗢 𝗨𝗡𝗔 𝗦𝗘𝗟𝗘𝗖𝗖𝗜𝗢𝗡 𝗗𝗘 𝗣𝗥𝗢𝗗𝗨𝗖𝗧𝗢𝗦 𝗗𝗘 𝗠𝗨𝗬 𝗔𝗟𝗧𝗔 𝗖𝗔𝗟𝗜𝗗𝗔𝗗, 𝗖𝗢𝗠𝗢 𝗡𝗨𝗘𝗦𝗧𝗥𝗢 𝗗𝗘𝗦𝗧𝗔𝗖𝗔𝗗𝗢 𝗣𝗥𝗢𝗧𝗘𝗖-𝗟𝗜𝗙𝗘, 𝗣𝗘𝗡𝗦𝗔𝗗𝗢𝗦 𝗣𝗔𝗥𝗔 𝗣𝗢𝗧𝗘𝗡𝗖𝗜𝗔𝗥 𝗧𝗨 𝗦𝗔𝗟𝗨𝗗 𝗬 𝗩𝗜𝗧𝗔𝗟𝗜𝗗𝗔𝗗. 𝗘𝗫𝗣𝗟𝗢𝗥𝗔 𝗡𝗨𝗘𝗦𝗧𝗥𝗢𝗦 𝗣𝗥𝗢𝗗𝗨𝗖𝗧𝗢𝗦, 𝗗𝗘𝗦𝗖𝗨𝗕𝗥𝗘 𝗡𝗨𝗘𝗦𝗧𝗥𝗢𝗦 𝗦𝗘𝗥𝗩𝗜𝗖𝗜𝗢𝗦 𝗬, 𝗦𝗜 𝗧𝗘 𝗜𝗡𝗧𝗘𝗥𝗘𝗦𝗔, ¡𝗖𝗢𝗠𝗢 𝗦𝗘𝗥 𝗣𝗔𝗥𝗧𝗘 𝗗𝗘 𝗘𝗦𝗧𝗔 𝗢𝗣𝗢𝗥𝗧𝗨𝗡𝗜𝗗𝗔𝗗! 𝗖𝗢𝗠𝗢 𝗡𝗢𝗦 𝗗𝗜𝗖𝗘 𝗡𝗨𝗘𝗦𝗧𝗥𝗢 𝗖𝗥𝗘𝗔𝗗𝗢𝗥 𝗗𝗜𝗢𝗦 𝗝𝗘𝗛𝗢𝗩𝗔:
+            </p>
+
+            <blockquote>
+                "La sabiduría es lo más importante, así que consigue sabiduría. Y, con todo lo que consigas, consigue entendimiento" – Proverbios 4:7
+            </blockquote>
+
+            <h2>TENEMOS UNA FORMA DE HACER DINERO DE FORMA RÁPIDA Y MUY EFICAZ, ¡AQUÍ ESTÁ TU OPORTUNIDAD!</h2>
+            <img src="https://i.postimg.cc/9XxP91PT/logo-lifehuni-1-600x270.png" alt="Logo LifeHuni">
+
+            <section id="oportunidad-section" class="product-item">
+                <h3>¡Tu Oportunidad de Negocio con Verde Vital!</h3>
+                <img src="https://i.postimg.cc/9XxP91PT/logo-lifehuni-1-600x270.png" alt="Logo LifeHuni - Oportunidad">
+                <p>
+                    En Verde Vital, no solo te ofrecemos productos de alta calidad, sino también la posibilidad de construir tu propio camino hacia la libertad financiera. Con nuestro modelo de negocio innovador, tienes la oportunidad de generar ingresos significativos distribuyendo productos que realmente mejoran la vida de las personas.
+                </p>
+                <h4>¿Por qué unirte a nosotros?</h4>
+                <ul>
+                    <li>**Productos de Impacto:** Ofrece soluciones de salud y bienestar que tus clientes amarán.</li>
+                    <li>**Flexibilidad Total:** Trabaja a tu propio ritmo, desde donde quieras y cuando quieras.</li>
+                    <li>**Ingresos Ilimitados:** Tu esfuerzo se traduce directamente en tus ganancias.</li>
+                    <li>**Soporte y Capacitación:** Te proporcionamos todas las herramientas y el conocimiento necesario para que tengas éxito.</li>
+                    <li>**Comunidad:** Forma parte de una red de emprendedores apasionados por el bienestar.</li>
+                </ul>
+                <p>
+                    ¡Es tu momento de tomar el control de tu futuro! Haz clic en el botón de abajo para más información y descubre cómo Verde Vital puede transformar tu vida.
+                </p>
+            </section>
+
+            <h2>Nuestros Productos Destacados</h2>
+
+            <section class="product-item" id="vid-life-section">
+                <h3>VID-LIFE 60 CAP</h3>
+                <img src="https://i.postimg.cc/MT0NKGZ8/Vid-life.jpg" alt="VID-LIFE 60 Cápsulas">
+                <button class="toggle-btn" onclick="toggleDetails('vid-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="vid-life"
+                        data-name="VID-LIFE 60 CAP"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="vid-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-description" class="sub-detail-content">
+                            <p>VID-LIFE 60 CAP es un suplemento dietario formulado para...</p>
+                            <p>Contenido Neto: 60 cápsulas.</p>
+                            <p>Fabricado en Colombia.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2012-0002444</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-ficha" class="sub-detail-content">
+                            <p>Aquí iría la información técnica detallada del producto VID-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Manténgalo fuera del alcance de los niños.</li>
+                                <li>Tómelo con las comidas, preferiblemente.</li>
+                                <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
+                                <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('vid-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="vid-life-more" class="sub-detail-content">
+                            <p>Algunos testimonios de usuarios satisfechos con VID-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="divi-her-section">
+                <h3>Divi-her 60 CAP</h3>
+                <img src="https://i.postimg.cc/MGQQwZMB/Divi-her-scaled.jpg" alt="Divi-her 60 Cápsulas">
+                <button class="toggle-btn" onclick="toggleDetails('divi-her-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="divi-her"
+                        data-name="Divi-her 60 CAP"
+                        data-price="85000">
+                    Añadir al Carrito
+                </button>
+
+                <div id="divi-her-details" class="details-content">
+                    <p><strong>Precio:</strong> $85.000 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-description" class="sub-detail-content">
+                            <p>Divi-her 60 CAP es un suplemento dietario diseñado para ayudar en procesos de bienestar y control de peso. Contiene una mezcla de ingredientes naturales que pueden contribuir a la sensación de saciedad y al metabolismo.</p>
+                            <p>Contenido Neto: 60 cápsulas.</p>
+                            <p>Fabricado en Colombia.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-invima" class="sub-detail-content">
+                            <p>Registro INVIMA N°. SD2021-0001401 R1</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-ficha" class="sub-detail-content">
+                            <p>Aquí iría la información técnica detallada del producto Divi-her.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Manténgalo fuera del alcance de los niños.</li>
+                                <li>Tómelo con las comidas, preferiblemente.</li>
+                                <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
+                                <li>Este producto es un suplemento dietario. No es un medicamento y no suple una alimentación equilibrada.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('divi-her-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="divi-her-more" class="sub-detail-content">
+                            <p>Descubre lo que nuestros clientes opinan sobre Divi-her.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="protec-life-section">
+                <h3>PROTEC-LIFE 500GR</h3>
+                <img src="https://i.postimg.cc/kgMS8sbL/PWEB-Protec-life-sesion-web.jpg" alt="PROTEC-LIFE">
+                <button class="toggle-btn" onclick="toggleDetails('protec-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="protec-life"
+                        data-name="PROTEC-LIFE 500GR"
+                        data-price="130780">
+                    Añadir al Carrito
+                </button>
+
+                <div id="protec-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $130.780 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-description" class="sub-detail-content">
+                            <p>PROTEC-LIFE 500GR es un suplemento alimenticio en polvo con sabor a fresa y vainilla...</p>
+                            <p>Presentación: Frasco por 500 Gr.</p>
+                            <p>Fabricado en Colombia.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2012-0002461</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-ficha" class="sub-detail-content">
+                            <p>Información detallada de los componentes y beneficios de PROTEC-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Consérvelo fuera del alcance de los niños.</li>
+                                <li>Tómelo con las comidas, preferiblemente.</li>
+                                <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
+                                <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
+                                <li>Conserve el producto bien cerrado para protegerlo de la humedad.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-life-more" class="sub-detail-content">
+                            <p>Casos de éxito y beneficios de PROTEC-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="protec-r-section">
+                <h3>PROTEC R</h3>
+                <img src="https://i.postimg.cc/G2MRvMm8/Protec-R-COL-2024-312x312.png" alt="PROTEC R">
+                <button class="toggle-btn" onclick="toggleDetails('protec-r-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="protec-r"
+                        data-name="PROTEC R"
+                        data-price="105049">
+                    Añadir al Carrito
+                </button>
+
+                <div id="protec-r-details" class="details-content">
+                    <p><strong>Precio:</strong> $105.049 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-description" class="sub-detail-content">
+                            <p>PROTEC R viene en dosis individuales que facilitan su preparación rápida. Perfecto para disfrutar en forma de bebida caliente.</p>
+                            <p>Caja por: 25 unidades</p>
+                            <p>Sachet: 6 GR</p>
+                            <p>Sabor: Frutos rojos y piña.</p>
+                            <p>Fabricado en Colombia.</p>
+                            <p>No contiene edulcorantes, ni azúcares adicionados que generen sellos de advertencia.</p>
+                            <p>Contiene una mezcla de vitaminas y minerales. Elaborado con ingredientes naturales.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-invima" class="sub-detail-content">
+                            <h4>Registros INVIMA:</h4>
+                            <ul>
+                                <li><strong>PIÑA:</strong> N°. NSA-0015860-2024 Var 1</li>
+                                <li><strong>FRUTOS ROJOS:</strong> N°. NSA-0015860-2024 Var 2</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-ficha" class="sub-detail-content">
+                            <p>Detalles técnicos sobre la composición de PROTEC R.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Mantenga el producto fuera del alcance de los niños.</li>
+                                <li>No es un medicamento y no suple una alimentación equilibrada.</li>
+                                <li>Una vez abierto, consumir en el menor tiempo posible.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('protec-r-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="protec-r-more" class="sub-detail-content">
+                            <p>Lo que dicen nuestros clientes sobre PROTEC R.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="life-dig-section">
+                <h3>LIFE-DIG 60 CAP</h3>
+                <img src="https://i.postimg.cc/XJp1L1FC/Life-Dig-Mesa-de-trabajo-1-2.jpg" alt="LIFE-DIG">
+                <button class="toggle-btn" onclick="toggleDetails('life-dig-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="life-dig"
+                        data-name="LIFE-DIG 60 CAP"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="life-dig-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-description" class="sub-detail-content">
+                            <p>LIFE-DIG 60 CAP está diseñado para mejorar el tránsito intestinal.</p>
+                            <p>Contenido Neto: 60 cápsulas.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2018-0004231</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-ficha" class="sub-detail-content">
+                            <p>Detalles sobre los ingredientes y beneficios específicos de LIFE-DIG.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conserve en lugar seco.</li>
+                                <li>Consulte a su médico si aplica.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('life-dig-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="life-dig-more" class="sub-detail-content">
+                            <p>Experiencias de usuarios con LIFE-DIG.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="gravi-life-section">
+                <h3>GRAVI-LIFE 60 TAB</h3>
+                <img src="https://i.postimg.cc/SQz5z1D3/Gravi-Life-Mesa-de-trabajo-1-3.jpg" alt="GRAVI-LIFE">
+                <button class="toggle-btn" onclick="toggleDetails('gravi-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="gravi-life"
+                        data-name="GRAVI-LIFE 60 TAB"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="gravi-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-description" class="sub-detail-content">
+                            <p>GRAVI-LIFE 60 TAB es un suplemento en tabletas formulado para...</p>
+                            <p>Contenido Neto: 60 tabletas.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2018-0004239</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-ficha" class="sub-detail-content">
+                            <p>Información detallada de GRAVI-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conserve en lugar fresco.</li>
+                                <li>Consulte a su médico si necesita.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('gravi-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="gravi-life-more" class="sub-detail-content">
+                            <p>Opiniones de clientes sobre GRAVI-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="maca-life-section">
+                <h3>MACA-LIFE 60 CAP</h3>
+                <img src="https://i.postimg.cc/xqDtLyD8/Maca-life-scaled.jpg" alt="MACA-LIFE">
+                <button class="toggle-btn" onclick="toggleDetails('maca-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="maca-life"
+                        data-name="MACA-LIFE 60 CAP"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="maca-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-description" class="sub-detail-content">
+                            <p>MACA-LIFE 60 CAP es un suplemento a base de maca, conocida por sus propiedades energizantes...</p>
+                            <p>Contenido Neto: 60 cápsulas.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2018-0004239</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-ficha" class="sub-detail-content">
+                            <p>Información detallada de los ingredientes y beneficios de MACA-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conservar en lugar fresco y seco.</li>
+                                <li>Consulte a su médico si es necesario.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('maca-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="maca-life-more" class="sub-detail-content">
+                            <p>Experiencias de usuarios con MACA-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="Jufre-life-section">
+                <h3>JUFRE-LIFE 500GR</h3>
+                <img src="https://i.postimg.cc/sfHKWLKz/Jufres-3-scaled.jpg" alt="JUFRE-LIFE">
+                <button class="toggle-btn" onclick="toggleDetails('jufre-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="jufre-life"
+                        data-name="JUFRE-LIFE 500GR"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="jufre-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-description" class="sub-detail-content">
+                            <p>JUFRE-LIFE 500GR es un suplemento en polvo que contribuye a...</p>
+                            <p>Contenido Neto: 500 Gr.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA: SD2012-0002461</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-ficha" class="sub-detail-content">
+                            <p>Detalles técnicos sobre la composición de JUFRE-LIFE.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conservar en lugar fresco.</li>
+                                <li>Consulte a su médico si es necesario.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('jufre-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="jufre-life-more" class="sub-detail-content">
+                            <p>Lo que dicen nuestros clientes sobre JUFRE-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Todos los derechos reservados &copy; 2025</p>
+            <p>Página Original & Auténtica</p>
+        </footer>
+    </div>
+
+    <a href="https://wa.me/573237917044?text=¡Hola,%20Gerardino!%20Me%20interesan%20los%20productos%20de%20Verde%20Vital." class="whatsapp-float" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 7.6 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 7.6-7.6 8.38 8.38 0 0 1 3.8.9L21 3l-1.9 5.7z"></path><path d="M11 15.5V12h3.5l-3 4-3-4h3.5v3.5L11 15.5z"></path></svg>
+    </a>
+
+    <div class="cart-icon" onclick="openShoppingCart()">
+        🛒 <span class="cart-count" id="cart-item-count">0</span>
+    </div>
+
+    <div id="shoppingCartModal" class="shopping-cart-modal">
+        <div class="shopping-cart-content">
+            <span class="close-cart-btn" onclick="closeShoppingCart()">&times;</span>
+            <h2>Tu Carrito de Compras</h2>
+            <ul id="cart-items-list"></ul>
+            <p id="cart-total">Total: $0.00 COP</p>
+            <button class="checkout-button" onclick="checkout()">Proceder al Pago (WhatsApp)</button>
+        </div>
+    </div>
+
+    <script>
+        // --- Lógica de la Puerta de Entrada ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const entranceDoor = document.getElementById('entranceDoor');
+            const enterButton = document.getElementById('enterButton');
+            const mainContent = document.getElementById('mainContent');
+
+            enterButton.addEventListener('click', () => {
+                entranceDoor.classList.add('hide-door');
+                entranceDoor.addEventListener('transitionend', () => {
+                    entranceDoor.style.display = 'none'; // Oculta completamente después de la transición
+                    mainContent.classList.remove('content-hidden');
+                    mainContent.classList.add('content-visible');
+                    // Opcional: Desplaza al inicio del contenido principal
+                    mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, { once: true }); // Asegura que el evento se dispare solo una vez
+            });
+
+            // Si quieres que el contenido principal sea visible por defecto sin la puerta,
+            // puedes comentar o eliminar el bloque 'DOMContentLoaded' y las clases 'content-hidden'
+            // y 'content-visible' de tu HTML.
+        });
 
 
+        // --- Lógica de Mostrar/Ocultar Detalles de Productos (toggle-btn) ---
+        function toggleDetails(contentId, button) {
+            const content = document.getElementById(contentId);
+            if (content) {
+                content.classList.toggle('show');
+                if (content.classList.contains('show')) {
+                    button.textContent = '▲ Ocultar detalles';
+                } else {
+                    button.textContent = '🔽 Ver más detalles';
+                }
+            }
+        }
 
+        // --- Lógica de Mostrar/Ocultar Sub-detalles (acordeón) ---
+        function toggleSubDetails(contentId, header) {
+            const content = document.getElementById(contentId);
+            const arrow = header.querySelector('.arrow');
+            if (content) {
+                content.classList.toggle('show-sub');
+                header.classList.toggle('active'); // Para rotar la flecha
+            }
+        }
 
+        // --- Lógica del Carrito de Compras ---
+        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || []; // Cargar carrito del almacenamiento local
+        const cartItemsList = document.getElementById('cart-items-list');
+        const cartTotalElement = document.getElementById('cart-total');
+        const cartItemCountElement = document.getElementById('cart-item-count');
+        const shoppingCartModal = document.getElementById('shoppingCartModal');
 
+        // Función para formatear precios a COP
+        function formatPrice(price) {
+            return new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0, // No mostrar decimales para COP si no son necesarios
+                maximumFractionDigits: 0,
+            }).format(price);
+        }
 
+        function updateCartDisplay() {
+            cartItemsList.innerHTML = '';
+            let total = 0;
 
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<li class="empty-cart-message">El carrito está vacío.</li>';
+            } else {
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <div class="cart-item-info">
+                            ${item.name} <br>
+                            <small>${formatPrice(item.price)} x ${item.quantity}</small>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button onclick="changeQuantity('${item.id}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="changeQuantity('${item.id}', 1)">+</button>
+                            <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">Eliminar</button>
+                        </div>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                    total += item.price * item.quantity;
+                });
+            }
 
+            cartTotalElement.textContent = `Total: ${formatPrice(total)}`;
+            cartItemCountElement.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+            // Guardar carrito en almacenamiento local
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+        }
+
+        function addToCart(event) {
+            const button = event.target;
+            const id = button.dataset.id;
+            const name = button.dataset.name;
+            const price = parseFloat(button.dataset.price);
+
+            const existingItemIndex = cart.findIndex(item => item.id === id);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity++;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+            updateCartDisplay();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartDisplay();
+        }
+
+        function changeQuantity(id, change) {
+            const itemIndex = cart.findIndex(item => item.id === id);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity += change;
+                if (cart[itemIndex].quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        function openShoppingCart() {
+            shoppingCartModal.style.display = 'flex'; // Usar 'flex' para centrar
+            updateCartDisplay(); // Asegúrate de que el carrito se actualice al abrir
+        }
+
+        function closeShoppingCart() {
+            shoppingCartModal.style.display = 'none';
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío. Por favor, añade algunos productos antes de proceder al pago.');
+                return;
+            }
+
+            let message = "¡Hola, Gerardo! Me gustaría realizar un pedido con los siguientes productos:\n\n";
+            let total = 0;
+
+            cart.forEach(item => {
+                message += `- ${item.name} (Cantidad: ${item.quantity}) - ${formatPrice(item.price * item.quantity)}\n`;
+                total += item.price * item.quantity;
+            });
+
+            message += `\nTotal a pagar: ${formatPrice(total)}\n`;
+            message += "Por favor, indícame cómo puedo proceder con el pago y el envío. ¡Gracias!";
+
+            const whatsappUrl = `https://wa.me/573237917044?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            // Opcional: Vaciar el carrito después de enviar el pedido
+            // cart = [];
+            // updateCartDisplay();
+            // closeShoppingCart();
+        }
+
+        // Asignar los event listeners a los botones "Añadir al Carrito"
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', addToCart);
+        });
+
+        // Inicializar el contador del carrito al cargar la página
+        updateCartDisplay();
+
+        // Cerrar el modal haciendo clic fuera de su contenido
+        window.onclick = function(event) {
+            if (event.target == shoppingCartModal) {
+                closeShoppingCart();
+            }
+        }
+
+    </script>
+</body>
+</html>
