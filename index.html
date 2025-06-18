@@ -12,7 +12,7 @@
 
     <style>
         :root {
-            --main-color: #0077cc; /* Azul vibrante */
+            --main-color: #0077cc; /* Azul vibrante (lo mantengo pero no lo usaremos para los títulos y navegación) */
             --secondary-color: #2ecc71; /* Verde esmeralda */
             --accent-color: #e74c3c; /* Rojo para acentos/advertencias */
             --background-light: #ecf0f1; /* Gris claro de fondo */
@@ -22,6 +22,8 @@
             --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
             --border-radius: 8px;
             --button-hover-brightness: 1.1; /* Ligero brillo al pasar el ratón */
+            --dark-green-footer: #0A3D0A; /* Nuevo color: Verde Oscuro para el pie de página */
+            --footer-text-light: #F0F0F0; /* Color de texto claro para el pie de página */
         }
 
         body {
@@ -65,7 +67,7 @@
 
         header nav a, .dropbtn {
             font-weight: 600;
-            color: var(--main-color);
+            color: var(--secondary-color); /* CAMBIO: Enlaces de navegación a color verde */
             text-decoration: none;
             padding: 10px 15px;
             transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
@@ -74,18 +76,23 @@
         }
 
         header nav a:hover, .dropbtn:hover {
-            color: white;
-            background-color: var(--main-color);
+            color: white; /* CAMBIO: Texto blanco al pasar el ratón sobre el enlace verde */
+            background-color: var(--secondary-color); /* CAMBIO: Fondo verde al pasar el ratón */
             transform: translateY(-2px);
         }
 
         h1 {
             text-align: center;
-            color: var(--main-color);
+            color: var(--secondary-color); /* CAMBIO: Título H1 "PORTAL DE VENTAS" a color verde */
             margin-top: 0;
             font-size: 2.5em;
             letter-spacing: -0.5px;
         }
+
+        h1 span { /* Asegura que "VERDE VITAL" dentro del H1 se mantenga verde si ya lo estaba */
+            color: var(--secondary-color);
+        }
+
 
         h2 {
             text-align: center;
@@ -250,34 +257,22 @@
         footer {
             text-align: center;
             font-size: 0.9em;
-            color: rgba(44, 62, 80, 0.8);
+            background-color: var(--dark-green-footer);
+            color: var(--footer-text-light);
             margin-top: 60px;
             padding: 25px;
-            border-top: 1px solid #eee;
+            border-top: none;
+            border-radius: var(--border-radius);
         }
 
-        /* WhatsApp flotante */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--whatsapp-green);
-            color: #fff;
-            padding: 16px 20px;
-            border-radius: 50px;
-            font-size: 20px;
+        footer a {
+            color: var(--secondary-color);
             text-decoration: none;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            z-index: 9999; /* z-index estándar, debajo del modal */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: color 0.3s ease;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1) translateY(-3px);
-            background-color: var(--whatsapp-green-dark);
+        footer a:hover {
+            color: white;
         }
 
         /* Carrito flotante */
@@ -295,7 +290,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9998; /* z-index estándar, debajo del modal */
+            z-index: 9998;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
@@ -319,18 +314,18 @@
 
         /* Modal del Carrito de Compras */
         .shopping-cart-modal {
-            display: none; /* Asegúrate de que esto esté aquí por defecto */
+            display: none;
             position: fixed;
-            z-index: 10000; /* El más alto para que siempre esté encima de todo */
+            z-index: 10000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.7); /* Ligeramente más oscuro para superposición */
+            background-color: rgba(0,0,0,0.7);
             justify-content: center;
             align-items: center;
-            animation: fadeIn 0.3s ease-out; /* Animación de entrada */
+            animation: fadeIn 0.3s ease-out;
         }
 
         @keyframes fadeIn {
@@ -512,7 +507,7 @@
             background-color: #f9f9f9;
             min-width: 180px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 101; /* Z-index para que esté por encima del header y contenido */
+            z-index: 101;
             border-radius: var(--border-radius);
             left: 50%;
             transform: translateX(-50%);
@@ -539,7 +534,7 @@
         }
 
         .dropdown-content a:hover {
-            background-color: var(--main-color);
+            background-color: var(--secondary-color); /* CAMBIO: Fondo verde para enlaces de submenú al pasar el ratón */
             color: white;
         }
 
@@ -581,13 +576,6 @@
                 padding: 15px;
             }
 
-            .whatsapp-float {
-                bottom: 20px;
-                right: 20px;
-                padding: 12px 16px;
-                font-size: 18px;
-            }
-
             .cart-icon {
                 top: 15px;
                 right: 20px;
@@ -611,6 +599,14 @@
                 justify-content: flex-end;
                 width: 100%;
             }
+
+            /* WhatsApp Widget Responsivo */
+            .whatsapp-widget {
+                width: 90%;
+                max-width: 300px;
+                right: 5%;
+                bottom: 20px;
+            }
         }
 
         /* NUEVA SECCIÓN DE ESTILOS PARA LA PUERTA DE ENTRADA */
@@ -620,16 +616,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--main-color); /* Color principal */
+            background-color: var(--main-color);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 10003; /* ¡MUY ALTO! para asegurar que cubre todo */
+            z-index: 10003;
             color: white;
             text-align: center;
-            opacity: 1; /* Inicia visible */
-            transition: opacity 0.5s ease; /* Transición suave para cuando desaparece */
+            opacity: 1;
+            transition: opacity 0.5s ease;
         }
 
         .entrance-door.hide-door {
@@ -638,9 +634,19 @@
 
         .entrance-door h2 {
             font-size: 3em;
-            margin-bottom: 30px;
+            margin-bottom: 0; /* Ajustado a 0 */
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            color: white; /* Asegura que el título sea blanco */
+            color: white;
+        }
+
+        .entrance-door .brand-name {
+            font-size: 4em; /* Más grande para destacar */
+            font-weight: bold;
+            color: var(--secondary-color); /* Color verde pleno */
+            margin-top: 10px; /* Pequeño espacio entre "PORTAL DE VENTAS" y "VERDE VITAL" */
+            margin-bottom: 30px; /* Espacio antes del botón */
+            letter-spacing: 2px; /* Un poco de espacio entre letras para el efecto */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.4); /* Sombra más pronunciada */
         }
 
         .entrance-door button {
@@ -663,12 +669,12 @@
 
         /* CLASES PARA EL CONTENIDO PRINCIPAL Y SU VISIBILIDAD */
         .content-hidden {
-            display: none; /* Oculta el contenido principal por defecto */
+            display: none;
         }
 
         .content-visible {
-            display: block; /* Muestra el contenido principal */
-            animation: fadeInContent 1s ease-out forwards; /* Animación de entrada */
+            display: block;
+            animation: fadeInContent 1s ease-out forwards;
         }
 
         @keyframes fadeInContent {
@@ -676,12 +682,173 @@
             to { opacity: 1; transform: translateY(0); }
         }
         /* FIN NUEVA SECCIÓN DE ESTILOS */
+
+        /* INICIO: ESTILOS DEL WIDGET DE WHATSAPP */
+        .whatsapp-widget-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: transparent;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: none;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .whatsapp-fab-button {
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 16px;
+            border-radius: 50%;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            width: 56px;
+            height: 56px;
+        }
+
+        .whatsapp-fab-button:hover {
+            background-color: var(--whatsapp-green-dark);
+            transform: scale(1.05);
+        }
+
+        .whatsapp-chat-container {
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            display: none;
+            opacity: 0;
+        }
+
+        .whatsapp-chat-container.show {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .whatsapp-chat-container.hide {
+             opacity: 0;
+             transform: scale(0.9);
+             pointer-events: none;
+        }
+
+        .whatsapp-header-chat {
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: bold;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .whatsapp-header-chat .whatsapp-icon-header {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .whatsapp-header-chat .close-button-chat {
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .whatsapp-body-chat {
+            padding: 15px;
+            background-color: white;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .whatsapp-input-chat {
+            width: calc(100% - 30px);
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+
+        .open-chat-button-widget {
+            background-color: var(--whatsapp-green);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .open-chat-button-widget img {
+            width: 18px;
+            height: 18px;
+            margin-right: 5px;
+            filter: brightness(0) invert(1);
+        }
+
+        .open-chat-button-widget:hover {
+            background-color: var(--whatsapp-green-dark);
+        }
+
+        .help-button-widget {
+            background-color: #eee;
+            color: #555;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-left: auto;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.2s ease;
+        }
+
+        .help-button-widget:hover {
+            background-color: #ddd;
+        }
+        /* FIN: ESTILOS DEL WIDGET DE WHATSAPP */
     </style>
 </head>
 <body id="top">
 
     <div id="entranceDoor" class="entrance-door">
         <h2>PORTAL DE VENTAS</h2>
+        <span class="brand-name">VERDE VITAL</span>
         <button id="enterButton">ENTRAR</button>
     </div>
 
@@ -692,6 +859,7 @@
                 <div class="dropdown">
                     <a href="#" class="dropbtn">Productos ▼</a>
                     <div class="dropdown-content">
+                        <a href="#libi-life-section">LIBI-LIFE 60 CAP</a>
                         <a href="#vid-life-section">VID-LIFE 60 CAP</a>
                         <a href="#divi-her-section">Divi-her 60 CAP</a>
                         <a href="#protec-life-section">PROTEC-LIFE 500GR</a>
@@ -700,12 +868,13 @@
                         <a href="#gravi-life-section">GRAVI-LIFE 60 TAB</a>
                         <a href="#maca-life-section">MACA-LIFE 60 CAP</a>
                         <a href="#Jufre-life-section">JUFRE-LIFE 500GR</a>
+                        <a href="#ju-vent-section">JU-VENT 500 GR</a>
+                        <a href="#reglu-section">REGLU 60 CAP</a>
                     </div>
                 </div>
                 <a href="#oportunidad-section">Oportunidad de Negocio</a>
-                <a href="https://wa.me/573237917044?text=Hola,%20Gerardino.%20Me%20interesa%20obtener%20información%20general." target="_blank">Contacto (WhatsApp)</a>
             </nav>
-            <h1>PORTAL DE VENTAS - GERARDINO JHON</h1>
+            <h1>PORTAL DE VENTAS <br> <span style="color: var(--secondary-color);">VERDE VITAL</span></h1>
         </header>
 
         <main>
@@ -717,7 +886,7 @@
             </blockquote>
 
             <h2>TENEMOS UNA FORMA DE HACER DINERO DE FORMA RÁPIDA Y MUY EFICAZ, ¡AQUÍ ESTÁ TU OPORTUNIDAD!</h2>
-            <img src="https://i.postimg.cc/9XxP91PT/logo-lifehuni-1-600x270.png" alt="Logo LifeHuni">
+           
 
             <section id="oportunidad-section" class="product-item">
                 <h3>¡Tu Oportunidad de Negocio con Verde Vital!</h3>
@@ -739,6 +908,111 @@
             </section>
 
             <h2>Nuestros Productos Destacados</h2>
+
+            <section class="product-item" id="libi-life-section">
+                <h3>LIBI-LIFE 60 CAP</h3>
+                <img src="https://i.postimg.cc/t4bPDdWx/Libilife-1-scaled.jpg" alt="LIBI-LIFE 60 Cápsulas">
+                <button class="toggle-btn" onclick="toggleDetails('libi-life-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="libi-life"
+                        data-name="LIBI-LIFE 60 CAP"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="libi-life-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('libi-life-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="libi-life-description" class="sub-detail-content">
+                            <p>LIBI-LIFE 60 CAP es un suplemento dietario. Cuenta con 2 valoraciones de clientes.</p>
+                            <p>Contenido Neto: 60 Tabletas.</p>
+                            <p>Fabricado en Colombia.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('libi-life-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="libi-life-invima" class="sub-detail-content">
+                            <p>Registro INVIMA N°. SD2019-0004419</p>
+                            <p>Expediente Sanitario: 20139330</p>
+                            <p>Nombre del Producto (INVIMA): Suplemento dietario en capsulas a base de extracto seco guaraná, maca root, l-arginina, niacina, sulfato de zinc, taurina, vitamina e; marca Llibilife</p>
+                            <p>Fecha de Vencimiento: 2029/08/30</p>
+                            <p>Modalidad: Fabricar y Vender</p>
+                            <p>Estado Actual: Vigente</p>
+                            <p>Resolución que concede registro: Resolución no. 2019031483 del 25 de julio de 2019</p>
+                            <p>Marca: LIBI LIFE</p>
+                            <p>Forma Farmacéutica: Cápsula Dura</p>
+                            <p>Vida Útil: 2 años en envase original a temperatura inferior a $30^\circ C$ y 65% humedad</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('libi-life-components', this)">
+                            <span>Componentes Principales</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="libi-life-components" class="sub-detail-content">
+                            <ul>
+                                <li>Extracto de Guaraná</li>
+                                <li>L-Arginina</li>
+                                <li>Taurina</li>
+                                <li>Niacina</li>
+                                <li>Zinc</li>
+                                <li>Vitamina E</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('libi-life-presentations', this)">
+                            <span>Presentaciones Comerciales</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="libi-life-presentations" class="sub-detail-content">
+                            <p>Disponible en:</p>
+                            <ul>
+                                <li>**Botellas PET:** Para 10, 20, 30, 50, 60, 90, 100, 120, 200 y 500 unidades de cápsulas (varios colores de plástico y tapas).</li>
+                                <li>**Blíster (Aluminio / PVC):** Para 1, 2, 5, 10, 15, 20, 30 cápsulas.</li>
+                                <li>**Sachet (Polipropileno Orientado):** Para 1, 2, 5, 10, 15, 20 y 30 cápsulas.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('libi-life-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="libi-life-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Manténgalo fuera del alcance de los niños.</li>
+                                <li>Tómelo con las comidas, preferiblemente antes del desayuno.</li>
+                                <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
+                                <li>Este producto es un suplemento dietario. No es un medicamento y no suple una alimentación equilibrada.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('libi-life-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="libi-life-more" class="sub-detail-content">
+                            <p>Descubre lo que nuestros clientes opinan sobre LIBI-LIFE.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section class="product-item" id="vid-life-section">
                 <h3>VID-LIFE 60 CAP</h3>
@@ -1169,7 +1443,7 @@
                         <div id="gravi-life-reco" class="sub-detail-content">
                             <ul>
                                 <li>Conserve en lugar fresco.</li>
-                                <li>Consulte a su médico si necesita.</li>
+                                <li>Consulte a su médico si aplica.</li>
                             </ul>
                         </div>
                     </div>
@@ -1325,18 +1599,203 @@
                     </div>
                 </div>
             </section>
+
+            <section class="product-item" id="ju-vent-section">
+                <h3>JU-VENT 500 GR</h3>
+                <img src="https://i.postimg.cc/hGT2CPpt/Ju-vent-1-scaled.jpg" alt="JU-VENT 500 GR">
+                <button class="toggle-btn" onclick="toggleDetails('ju-vent-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="ju-vent"
+                        data-name="JU-VENT 500 GR"
+                        data-price="130780">
+                    Añadir al Carrito
+                </button>
+
+                <div id="ju-vent-details" class="details-content">
+                    <p><strong>Precio:</strong> $130.780 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('ju-vent-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="ju-vent-description" class="sub-detail-content">
+                            <p>JU-VENT 500 GR es un suplemento en polvo con sabor a fresa y vainilla, formulado con una mezcla de componentes clave para el bienestar:</p>
+                            <ul>
+                                <li>Colágeno Hidrolizado</li>
+                                <li>Gelatina</li>
+                                <li>Proteína Hidrolizada de Soya</li>
+                                <li>Avena en Polvo</li>
+                                <li>Vitamina A</li>
+                                <li>Vitamina E</li>
+                                <li>Vitamina C</li>
+                                <li>Vitamina B1</li>
+                                <li>Vitamina B2</li>
+                                <li>Vitamina B3 (Niacina)</li>
+                                <li>Vitamina B6</li>
+                                <li>Vitamina B8</li>
+                                <li>Vitamina B12 (Cobalamina)</li>
+                            </ul>
+                            <p>Presentación: Frasco por 500 Gr.</p>
+                            <p>Fabricado en Colombia.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('ju-vent-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="ju-vent-invima" class="sub-detail-content">
+                            <p>Registro INVIMA N° SD2012-0002443</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('ju-vent-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="ju-vent-ficha" class="sub-detail-content">
+                            <p>Aquí se detallará la información técnica sobre la composición y propiedades de JU-VENT 500 GR.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('ju-vent-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="ju-vent-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Manténgalo fuera del alcance de los niños.</li>
+                                <li>Tómelo con las comidas, preferiblemente.</li>
+                                <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
+                                <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
+                                <li>Conserve el producto bien cerrado para protegerlo de la humedad.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('ju-vent-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="ju-vent-more" class="sub-detail-content">
+                            <p>Conozca las experiencias de nuestros clientes con JU-VENT 500 GR.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="product-item" id="reglu-section">
+                <h3>REGLU 60 CAP</h3>
+                <img src="https://i.postimg.cc/FHWjgPsF/Reglu-scaled.jpg" alt="REGLU 60 CAP">
+                <button class="toggle-btn" onclick="toggleDetails('reglu-details', this)">🔽 Ver más detalles</button>
+                <button class="add-to-cart-btn"
+                        data-id="reglu"
+                        data-name="REGLU 60 CAP"
+                        data-price="81738">
+                    Añadir al Carrito
+                </button>
+
+                <div id="reglu-details" class="details-content">
+                    <p><strong>Precio:</strong> $81.738 COP</p>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('reglu-description', this)">
+                            <span>Descripción</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="reglu-description" class="sub-detail-content">
+                            <p>REGLU 60 CAP es un suplemento dietario.</p>
+                            <p>Contenido Neto: 60 cápsulas.</p>
+                            <p>Fabricado en Colombia.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('reglu-invima', this)">
+                            <span>Registro INVIMA</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="reglu-invima" class="sub-detail-content">
+                            <p>Registro INVIMA N°. SD2024-0004813</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('reglu-ficha', this)">
+                            <span>Ficha Técnica</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="reglu-ficha" class="sub-detail-content">
+                            <p>Aquí irá la información técnica detallada del producto REGLU 60 CAP.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('reglu-reco', this)">
+                            <span>Recomendaciones de Uso</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="reglu-reco" class="sub-detail-content">
+                            <ul>
+                                <li>Siga las instrucciones de uso que aparecen en la etiqueta.</li>
+                                <li>Conserve el producto en un lugar fresco y seco.</li>
+                                <li>Manténgalo fuera del alcance de los niños.</li>
+                                <li>Tómelo con las comidas, preferiblemente.</li>
+                                <li>Personas con alguna condición especial de salud deberán consultar a su médico antes de tomar este producto.</li>
+                                <li>Este producto es un suplemento dietario, no es un medicamento y no suple una alimentación equilibrada.</li>
+                                <li>Conserve el producto bien cerrado para protegerlo de la humedad.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sub-detail-section">
+                        <div class="sub-detail-header" onclick="toggleSubDetails('reglu-more', this)">
+                            <span>Testimonios y Más</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div id="reglu-more" class="sub-detail-content">
+                            <p>Testimonios de usuarios satisfechos con REGLU 60 CAP.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer>
             <p>Todos los derechos reservados &copy; 2025</p>
             <p>Página Original & Auténtica</p>
+            <p>Contacto: <a href="mailto:Elbacansoyo@gmail.com">Elbacansoyo@gmail.com</a> | Teléfono: 3005465576</p>
+            <p>Ubicación: Girón, Santander, Colombia</p>
         </footer>
     </div>
 
-    <a href="https://wa.me/573237917044?text=¡Hola,%20Gerardino!%20Me%20interesan%20los%20productos%20de%20Verde%20Vital." class="whatsapp-float" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 7.6 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 7.6-7.6 8.38 8.38 0 0 1 3.8.9L21 3l-1.9 5.7z"></path><path d="M11 15.5V12h3.5l-3 4-3-4h3.5v3.5L11 15.5z"></path></svg>
-    </a>
-
+    <div class="whatsapp-widget-float">
+        <div id="whatsappChatContainer" class="whatsapp-chat-container">
+            <div class="whatsapp-header-chat">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="whatsapp-icon-header feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 7.6 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 7.6-7.6 8.38 8.38 0 0 1 3.8.9L21 3z"></path></svg>
+                <span>WhatsApp</span>
+                <span class="close-button-chat" onclick="hideWhatsAppChat()">&times;</span>
+            </div>
+            <div class="whatsapp-body-chat">
+                <input type="text" id="whatsappMessageInput" value="¡Hola! ¿Cómo podemos ayudarte?." class="whatsapp-input-chat">
+                <button class="open-chat-button-widget" onclick="openWhatsAppChatWithText()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    Abrir chat
+                </button>
+                <button class="help-button-widget">?</button>
+            </div>
+        </div>
+        <div class="whatsapp-fab-button" onclick="toggleWhatsAppChat()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 7.6 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 7.6-7.6 8.38 8.38 0 0 1 3.8.9L21 3l-1.9 5.7z"></path><path d="M11 15.5V12h3.5l-3 4-3-4h3.5v3.5L11 15.5z"></path></svg>
+        </div>
+    </div>
     <div class="cart-icon" onclick="openShoppingCart()">
         🛒 <span class="cart-count" id="cart-item-count">0</span>
     </div>
@@ -1361,19 +1820,13 @@
             enterButton.addEventListener('click', () => {
                 entranceDoor.classList.add('hide-door');
                 entranceDoor.addEventListener('transitionend', () => {
-                    entranceDoor.style.display = 'none'; // Oculta completamente después de la transición
+                    entranceDoor.style.display = 'none';
                     mainContent.classList.remove('content-hidden');
                     mainContent.classList.add('content-visible');
-                    // Opcional: Desplaza al inicio del contenido principal
                     mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, { once: true }); // Asegura que el evento se dispare solo una vez
+                }, { once: true });
             });
-
-            // Si quieres que el contenido principal sea visible por defecto sin la puerta,
-            // puedes comentar o eliminar el bloque 'DOMContentLoaded' y las clases 'content-hidden'
-            // y 'content-visible' de tu HTML.
         });
-
 
         // --- Lógica de Mostrar/Ocultar Detalles de Productos (toggle-btn) ---
         function toggleDetails(contentId, button) {
@@ -1394,23 +1847,22 @@
             const arrow = header.querySelector('.arrow');
             if (content) {
                 content.classList.toggle('show-sub');
-                header.classList.toggle('active'); // Para rotar la flecha
+                header.classList.toggle('active');
             }
         }
 
         // --- Lógica del Carrito de Compras ---
-        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || []; // Cargar carrito del almacenamiento local
+        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
         const cartItemsList = document.getElementById('cart-items-list');
         const cartTotalElement = document.getElementById('cart-total');
         const cartItemCountElement = document.getElementById('cart-item-count');
         const shoppingCartModal = document.getElementById('shoppingCartModal');
 
-        // Función para formatear precios a COP
         function formatPrice(price) {
             return new Intl.NumberFormat('es-CO', {
                 style: 'currency',
                 currency: 'COP',
-                minimumFractionDigits: 0, // No mostrar decimales para COP si no son necesarios
+                minimumFractionDigits: 0,
                 maximumFractionDigits: 0,
             }).format(price);
         }
@@ -1444,7 +1896,6 @@
             cartTotalElement.textContent = `Total: ${formatPrice(total)}`;
             cartItemCountElement.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-            // Guardar carrito en almacenamiento local
             localStorage.setItem('shoppingCart', JSON.stringify(cart));
         }
 
@@ -1482,8 +1933,8 @@
         }
 
         function openShoppingCart() {
-            shoppingCartModal.style.display = 'flex'; // Usar 'flex' para centrar
-            updateCartDisplay(); // Asegúrate de que el carrito se actualice al abrir
+            shoppingCartModal.style.display = 'flex';
+            updateCartDisplay();
         }
 
         function closeShoppingCart() {
@@ -1507,30 +1958,59 @@
             message += `\nTotal a pagar: ${formatPrice(total)}\n`;
             message += "Por favor, indícame cómo puedo proceder con el pago y el envío. ¡Gracias!";
 
-            const whatsappUrl = `https://wa.me/573237917044?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/573005465576?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
-
-            // Opcional: Vaciar el carrito después de enviar el pedido
-            // cart = [];
-            // updateCartDisplay();
-            // closeShoppingCart();
         }
 
-        // Asignar los event listeners a los botones "Añadir al Carrito"
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
             button.addEventListener('click', addToCart);
         });
 
-        // Inicializar el contador del carrito al cargar la página
         updateCartDisplay();
 
-        // Cerrar el modal haciendo clic fuera de su contenido
         window.onclick = function(event) {
             if (event.target == shoppingCartModal) {
                 closeShoppingCart();
             }
         }
 
+        // --- Lógica del Widget de WhatsApp ---
+        const whatsappChatContainer = document.getElementById('whatsappChatContainer');
+        const whatsappMessageInput = document.getElementById('whatsappMessageInput');
+        const whatsappPhoneNumber = '573005465576';
+
+        function toggleWhatsAppChat() {
+            if (whatsappChatContainer.classList.contains('show')) {
+                whatsappChatContainer.classList.remove('show');
+                whatsappChatContainer.classList.add('hide');
+                whatsappChatContainer.addEventListener('transitionend', function handler() {
+                    whatsappChatContainer.style.display = 'none';
+                    whatsappChatContainer.classList.remove('hide');
+                    whatsappChatContainer.removeEventListener('transitionend', handler);
+                }, { once: true });
+            } else {
+                whatsappChatContainer.style.display = 'block';
+                requestAnimationFrame(() => {
+                    whatsappChatContainer.classList.add('show');
+                });
+            }
+        }
+
+        function hideWhatsAppChat() {
+            whatsappChatContainer.classList.remove('show');
+            whatsappChatContainer.classList.add('hide');
+            whatsappChatContainer.addEventListener('transitionend', function handler() {
+                whatsappChatContainer.style.display = 'none';
+                whatsappChatContainer.classList.remove('hide');
+                whatsappChatContainer.removeEventListener('transitionend', handler);
+            }, { once: true });
+        }
+
+        function openWhatsAppChatWithText() {
+            const prefilledText = encodeURIComponent(whatsappMessageInput.value || '¡Hola! ¿Cómo podemos ayudarte?.');
+            const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${prefilledText}`;
+            window.open(whatsappUrl, '_blank');
+        }
     </script>
 </body>
 </html>
